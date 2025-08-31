@@ -227,6 +227,27 @@
       text-align: center;
     }
     
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .chart-header h3 {
+      margin-bottom: 0;
+      text-align: left;
+      flex: 1;
+    }
+    
+    .chart-header .download-btn {
+      padding: 0.5rem 1.5rem;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+    
     .legend { 
       margin-top: 1.5rem; 
       font-size: 0.9rem;
@@ -303,6 +324,16 @@
         min-width: 300px;
       }
       
+      .chart-header {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+      }
+      
+      .chart-header h3 {
+        text-align: center;
+      }
+      
       .container {
         padding: 1rem;
       }
@@ -320,6 +351,21 @@
       animation: fadeIn 0.6s ease-in;
     }
     
+    .stat-card.updated {
+      transform: scale(1.05);
+      box-shadow: 0 8px 40px rgba(46, 204, 113, 0.3);
+      border: 2px solid #2ecc71;
+      animation: pulse 0.6s ease-in-out;
+    }
+    
+    .stat-card.updated .number {
+      color: #2ecc71;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1.05); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1.05); }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -329,35 +375,35 @@
 <body>
   <div class="header">
     <h1>Jadavpur University</h1>
-    <p>NIRF Rankings Dashboard</p>
+    <p>NIRF Rankings Dashboard (2017 Onwards)</p>
   </div>
 
   <div class="container">
     <div class="stats-grid">
       <div class="stat-card">
         <h4>Best Overall Rank</h4>
-        <div class="number">12</div>
-        <div class="subtitle">2017, 2020, 2022</div>
+        <div class="number" id="best-overall-rank">12</div>
+        <div class="subtitle" id="best-overall-years">2017, 2020, 2022</div>
       </div>
       <div class="stat-card">
         <h4>Best University Rank</h4>
-        <div class="number">4</div>
-        <div class="subtitle">2022, 2023</div>
+        <div class="number" id="best-university-rank">4</div>
+        <div class="subtitle" id="best-university-years">2022, 2023</div>
       </div>
       <div class="stat-card">
         <h4>Best Engineering Rank</h4>
-        <div class="number">9</div>
-        <div class="subtitle">2017</div>
+        <div class="number" id="best-engineering-rank">9</div>
+        <div class="subtitle" id="best-engineering-years">2017</div>
       </div>
       <div class="stat-card">
-        <h4>State Public University</h4>
-        <div class="number">2</div>
-        <div class="subtitle">2024</div>
+        <h4>Best Research Rank</h4>
+        <div class="number" id="best-research-rank">13</div>
+        <div class="subtitle" id="best-research-years">2022</div>
       </div>
     </div>
 
     <div class="input-section fade-in">
-      <h3>📊 Enter 2025 Rankings</h3>
+      <h3>📊 Enter NIRF 2025 Rankings </h3>
       <div class="input-grid">
         <div class="input-group">
           <label for="Overall-2025">Overall Ranking</label>
@@ -388,10 +434,7 @@
           <input type="number" id="Architecture-2025" placeholder="Enter rank..." />
         </div>
       </div>
-      <div class="button-group">
-        <button onclick="update2025()">🚀 Update Rankings</button>
-        <button onclick="downloadChart()" class="download-btn">📥 Download Chart as JPEG</button>
-      </div>
+      <button onclick="update2025()">🚀 Update Rankings</button>
     </div>
 
     <div class="table-container fade-in">
@@ -424,7 +467,10 @@
 
     <div class="charts fade-in">
       <div class="chart-container">
-        <h3>📈 NIRF JU Rankings Trend Analysis</h3>
+        <div class="chart-header">
+          <h3>📈 NIRF Rankings Trend Analysis</h3>
+          <button onclick="downloadChart()" class="download-btn">📥 Download as JPEG</button>
+        </div>
         <canvas id="nirfChart"></canvas>
         <div class="legend">
           <div class="legend-item">
@@ -461,6 +507,69 @@
   </div>
 
   <script>
+    // Historical data for finding best ranks
+    const historicalData = {
+      Overall: [12, 13, 13, 12, 14, 12, 13, 17], // 2017-2024
+      University: [5, 6, 6, 5, 8, 4, 4, 9], // 2017-2024
+      Engineering: [9, 12, 14, 17, 17, 11, 10, 12], // 2017-2024
+      Research: [null, null, null, null, 17, 13, 19, 21], // 2017-2024
+      Pharmacy: [null, null, null, null, null, 18, 18, 18], // 2017-2024
+      StatePublicUniversity: [null, null, null, null, null, null, null, 2], // 2017-2024
+      Architecture: [null, null, null, null, null, null, null, null] // 2017-2024
+    };
+
+    const years = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+
+    function findBestRankAndYears(category, includeNew2025 = false, new2025Value = null) {
+      let data = [...historicalData[category]];
+      let yearsList = [...years];
+      
+      if (includeNew2025 && new2025Value) {
+        data.push(new2025Value);
+        yearsList.push(2025);
+      }
+      
+      // Filter out null values and find minimum (best rank)
+      const validData = data.map((rank, index) => ({ rank, year: yearsList[index] }))
+                           .filter(item => item.rank !== null);
+      
+      if (validData.length === 0) return { bestRank: null, bestYears: [] };
+      
+      const bestRank = Math.min(...validData.map(item => item.rank));
+      const bestYears = validData.filter(item => item.rank === bestRank)
+                                .map(item => item.year);
+      
+      return { bestRank, bestYears };
+    }
+
+    function updateBestRankCard(category, bestRank, bestYears, isUpdated = false) {
+      const categoryMap = {
+        Overall: 'overall',
+        University: 'university', 
+        Engineering: 'engineering',
+        Research: 'research'
+      };
+      
+      const key = categoryMap[category];
+      if (!key) return;
+      
+      const rankElement = document.getElementById(`best-${key}-rank`);
+      const yearsElement = document.getElementById(`best-${key}-years`);
+      const cardElement = rankElement.closest('.stat-card');
+      
+      if (rankElement && yearsElement) {
+        rankElement.textContent = bestRank;
+        yearsElement.textContent = bestYears.join(', ');
+        
+        if (isUpdated) {
+          cardElement.classList.add('updated');
+          setTimeout(() => {
+            cardElement.classList.remove('updated');
+          }, 3000);
+        }
+      }
+    }
+
     const labels = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
 
     const data = {
@@ -536,7 +645,8 @@
         const cell = document.getElementById(cat + '-2025-cell');
         
         if (inputVal) {
-          cell.innerText = inputVal;
+          const newRank = parseInt(inputVal);
+          cell.innerText = newRank;
           cell.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
           cell.style.color = 'white';
           cell.style.fontWeight = '600';
@@ -547,10 +657,26 @@
           
           // Update or add 2025 data
           if (data.datasets[idx].data.length === labels.length) {
-            data.datasets[idx].data.push(parseInt(inputVal));
+            data.datasets[idx].data.push(newRank);
           } else {
-            data.datasets[idx].data[data.datasets[idx].data.length - 1] = parseInt(inputVal);
+            data.datasets[idx].data[data.datasets[idx].data.length - 1] = newRank;
           }
+          
+          // Check if this new rank is better than historical best for top 4 categories
+          if (['Overall', 'University', 'Engineering', 'Research'].includes(cat)) {
+            const currentBest = findBestRankAndYears(cat, false);
+            const newBest = findBestRankAndYears(cat, true, newRank);
+            
+            // If the new 2025 rank is better (lower number) than the previous best
+            if (newBest.bestRank < currentBest.bestRank) {
+              updateBestRankCard(cat, newBest.bestRank, newBest.bestYears, true);
+            }
+            // If it ties with the best rank, update the years list
+            else if (newBest.bestRank === currentBest.bestRank && newBest.bestYears.length > currentBest.bestYears.length) {
+              updateBestRankCard(cat, newBest.bestRank, newBest.bestYears, true);
+            }
+          }
+          
           updated = true;
         } else {
           if (data.datasets[idx].data.length === labels.length) {
@@ -599,7 +725,7 @@
       
       ctx.fillStyle = '#2a5298';
       ctx.font = '20px Arial, sans-serif';
-      ctx.fillText('Trend Analysis', downloadCanvas.width / 2, 85);
+      ctx.fillText('Trend Analysis (2017 Onwards)', downloadCanvas.width / 2, 85);
       
       // Calculate the chart area
       const chartArea = {
