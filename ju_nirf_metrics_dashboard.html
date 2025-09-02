@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jadavpur University — NIRF Ranks Dashboard</title>
+  <title>Jadavpur University — NIRF Detailed Metrics Analysis</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     * {
@@ -11,16 +11,6 @@
       margin: 0;
       padding: 0;
     }
-
-    // Add smooth scrolling for better UX
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
-    });
     
     body { 
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
@@ -51,212 +41,35 @@
     }
     
     .container {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 2rem 1rem;
     }
     
-    .input-section { 
-      background: white;
+    .overall-score {
+      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+      color: white;
       padding: 2rem;
       border-radius: 15px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      margin-bottom: 2rem;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-    
-    .input-section h3 {
-      color: #2c3e50;
-      margin-bottom: 1.5rem;
-      font-size: 1.3rem;
-      font-weight: 600;
-    }
-    
-    .input-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    
-    .input-group {
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .input-group label {
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: #34495e;
-      font-size: 0.9rem;
-    }
-    
-    .input-section input { 
-      padding: 0.75rem;
-      border: 2px solid #e1e8ed;
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      background: #f8f9fa;
-    }
-    
-    .input-section input:focus {
-      outline: none;
-      border-color: #3498db;
-      background: white;
-      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
-    }
-    
-    button { 
-      background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-      color: white; 
-      border: none; 
-      padding: 0.75rem 2rem; 
-      border-radius: 8px; 
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-    }
-    
-    button:hover { 
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
-    }
-    
-    button:active {
-      transform: translateY(0);
-    }
-    
-    .download-btn {
-      background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
-      box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
-    }
-    
-    .download-btn:hover {
-      box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
-    }
-    
-    .button-group {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    
-    @media (max-width: 480px) {
-      .button-group {
-        flex-direction: column;
-      }
-      
-      .button-group button {
-        width: 100%;
-      }
-    }
-    
-    .table-container {
-      background: white;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      margin-bottom: 2rem;
-    }
-    
-    table { 
-      border-collapse: collapse; 
-      width: 100%; 
-      background-color: white;
-    }
-    
-    th, td { 
-      padding: 1rem 0.75rem; 
-      text-align: center; 
-      border-bottom: 1px solid #ecf0f1;
-    }
-    
-    th { 
-      background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
-      color: white;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-size: 0.85rem;
-    }
-    
-    tbody tr {
-      transition: all 0.2s ease;
-    }
-    
-    tbody tr:hover { 
-      background-color: #f8f9fa;
-      transform: scale(1.001);
-    }
-    
-    tbody tr:nth-child(even) {
-      background-color: #fcfcfd;
-    }
-    
-    td:first-child {
-      font-weight: 600;
-      text-align: left;
-      padding-left: 1.5rem;
-      color: #2c3e50;
-    }
-    
-    .charts { 
-      display: flex; 
-      flex-wrap: wrap; 
-      gap: 2rem; 
-    }
-    
-    .chart-container { 
-      flex: 1; 
-      min-width: 400px; 
-      background: white; 
-      padding: 2rem; 
-      border-radius: 15px; 
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-    
-    .chart-container h3 {
-      margin-bottom: 1.5rem;
-      color: #2c3e50;
-      font-size: 1.2rem;
-      font-weight: 600;
       text-align: center;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
     }
     
-    .legend { 
-      margin-top: 1.5rem; 
-      font-size: 0.9rem;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
+    .overall-score h2 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
     }
     
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.25rem 0.75rem;
-      background: #f8f9fa;
-      border-radius: 20px;
-      font-weight: 500;
-    }
-    
-    .legend span { 
-      display: inline-block; 
-      width: 16px; 
-      height: 16px; 
-      border-radius: 50%;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    .overall-score p {
+      font-size: 1.2rem;
+      opacity: 0.9;
     }
     
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1.5rem;
       margin-bottom: 2rem;
     }
@@ -267,27 +80,191 @@
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       text-align: center;
-      border: 1px solid rgba(255,255,255,0.2);
+      border-left: 5px solid;
+      position: relative;
+      overflow: hidden;
     }
+    
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50px;
+      height: 50px;
+      background: inherit;
+      opacity: 0.1;
+      border-radius: 0 12px 0 50px;
+    }
+    
+    .stat-card.excellent { border-left-color: #2ecc71; }
+    .stat-card.good { border-left-color: #3498db; }
+    .stat-card.average { border-left-color: #f39c12; }
+    .stat-card.weak { border-left-color: #e74c3c; }
     
     .stat-card h4 {
-      color: #7f8c8d;
-      font-size: 0.9rem;
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      color: #2c3e50;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
     }
     
-    .stat-card .number {
-      font-size: 2rem;
+    .stat-card .score {
+      font-size: 2.5rem;
       font-weight: 700;
-      color: #2980b9;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.5rem;
     }
+    
+    .stat-card.excellent .score { color: #2ecc71; }
+    .stat-card.good .score { color: #3498db; }
+    .stat-card.average .score { color: #f39c12; }
+    .stat-card.weak .score { color: #e74c3c; }
     
     .stat-card .subtitle {
-      font-size: 0.8rem;
-      color: #95a5a6;
+      font-size: 0.9rem;
+      color: #7f8c8d;
+    }
+    
+    .metrics-section {
+      margin-bottom: 3rem;
+    }
+    
+    .section-title {
+      background: white;
+      padding: 1.5rem 2rem;
+      border-radius: 15px 15px 0 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      border-left: 5px solid #3498db;
+    }
+    
+    .section-title h3 {
+      color: #2c3e50;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .section-title .total-score {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #3498db;
+    }
+    
+    .metrics-table {
+      background: white;
+      border-radius: 0 0 15px 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #ecf0f1;
+    }
+    
+    th {
+      background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+      color: white;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 0.85rem;
+    }
+    
+    tbody tr:hover {
+      background-color: #f8f9fa;
+      transform: scale(1.001);
+      transition: all 0.2s ease;
+    }
+    
+    .score-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .score-value {
+      font-weight: 700;
+      font-size: 1.1rem;
+      min-width: 50px;
+    }
+    
+    .bar-container {
+      flex: 1;
+      height: 8px;
+      background: #ecf0f1;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.8s ease;
+    }
+    
+    .bar-excellent { background: linear-gradient(90deg, #2ecc71, #27ae60); }
+    .bar-good { background: linear-gradient(90deg, #3498db, #2980b9); }
+    .bar-average { background: linear-gradient(90deg, #f39c12, #e67e22); }
+    .bar-weak { background: linear-gradient(90deg, #e74c3c, #c0392b); }
+    
+    .analysis-cell {
+      max-width: 300px;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    
+    .charts-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .chart-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    }
+    
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .chart-header h3 {
+      color: #2c3e50;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+    
+    .download-btn {
+      background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+      color: white;
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+    }
+    
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
     }
     
     @media (max-width: 768px) {
@@ -295,24 +272,34 @@
         font-size: 1.8rem;
       }
       
-      .input-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .chart-container {
-        min-width: 300px;
-      }
-      
       .container {
         padding: 1rem;
       }
       
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .charts-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .chart-header {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+      }
+      
       table {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
       }
       
       th, td {
-        padding: 0.5rem 0.25rem;
+        padding: 0.5rem;
+      }
+      
+      .analysis-cell {
+        max-width: none;
       }
     }
     
@@ -329,261 +316,490 @@
 <body>
   <div class="header">
     <h1>Jadavpur University</h1>
-    <p>NIRF Rankings Dashboard</p>
+    <p>NIRF 2024 — Detailed Metrics Analysis Dashboard</p>
   </div>
 
   <div class="container">
+    <div class="overall-score fade-in">
+      <h2>65.408</h2>
+      <p>Overall NIRF Score 2024 — Solid Performance with Room for Strategic Improvements</p>
+    </div>
+
     <div class="stats-grid">
-      <div class="stat-card">
-        <h4>Best Overall Rank</h4>
-        <div class="number">12</div>
-        <div class="subtitle">2017, 2020, 2022</div>
+      
+      <div class="stat-card good">
+        <h4>Teaching, Learning & Resources (TLR)</h4>
+        <div class="score">68.83</div>
+        <div class="subtitle">Good Performance</div>
       </div>
-      <div class="stat-card">
-        <h4>Best University Rank</h4>
-        <div class="number">4</div>
-        <div class="subtitle">2022, 2023</div>
+      <div class="stat-card average">
+        <h4>Research & Professional Practice (RPC)</h4>
+        <div class="score">51.36</div>
+        <div class="subtitle">Needs Improvement</div>
       </div>
-      <div class="stat-card">
-        <h4>Best Engineering Rank</h4>
-        <div class="number">9</div>
-        <div class="subtitle">2017</div>
+	  <div class="stat-card excellent">
+        <h4>Graduation Outcomes (GO)</h4>
+        <div class="score">89.92</div>
+        <div class="subtitle">Strongest Area</div>
       </div>
-      <div class="stat-card">
-        <h4>State Public University</h4>
-        <div class="number">2</div>
-        <div class="subtitle">2024</div>
+      <div class="stat-card weak">
+        <h4>Outreach & Inclusivity (OI)</h4>
+        <div class="score">49.93</div>
+        <div class="subtitle">Requires Attention</div>
       </div>
-    </div>
-
-    <div class="input-section fade-in">
-      <h3>📊 Enter 2025 Rankings</h3>
-      <div class="input-grid">
-        <div class="input-group">
-          <label for="Overall-2025">Overall Ranking</label>
-          <input type="number" id="Overall-2025" placeholder="Enter rank..." />
-        </div>
-        <div class="input-group">
-          <label for="University-2025">University Ranking</label>
-          <input type="number" id="University-2025" placeholder="Enter rank..." />
-        </div>
-        <div class="input-group">
-          <label for="Engineering-2025">Engineering Ranking</label>
-          <input type="number" id="Engineering-2025" placeholder="Enter rank..." />
-        </div>
-        <div class="input-group">
-          <label for="Research-2025">Research Ranking</label>
-          <input type="number" id="Research-2025" placeholder="Enter rank..." />
-        </div>
-        <div class="input-group">
-          <label for="Pharmacy-2025">Pharmacy Ranking</label>
-          <input type="number" id="Pharmacy-2025" placeholder="Enter rank..." />
-        </div>
-        <div class="input-group">
-          <label for="StatePublicUniversity-2025">State Public University</label>
-          <input type="number" id="StatePublicUniversity-2025" placeholder="Enter rank..." />
-        </div>
-        <div class="input-group">
-          <label for="Architecture-2025">Architecture Ranking</label>
-          <input type="number" id="Architecture-2025" placeholder="Enter rank..." />
-        </div>
-      </div>
-      <div class="button-group">
-        <button onclick="update2025()">🚀 Update Rankings</button>
-        <button onclick="downloadChart()" class="download-btn">📥 Download Chart as JPEG</button>
+	  <div class="stat-card good">
+        <h4>Perception (PR)</h4>
+        <div class="score">63.74</div>
+        <div class="subtitle">Good Reputation</div>
       </div>
     </div>
 
-    <div class="table-container fade-in">
-      <table id="ranksTable">
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>2025</th>
-            <th>2024</th>
-            <th>2023</th>
-            <th>2022</th>
-            <th>2021</th>
-            <th>2020</th>
-            <th>2019</th>
-            <th>2018</th>
-            <th>2017</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Overall</td><td id="Overall-2025-cell">—</td><td>17</td><td>13</td><td>12</td><td>14</td><td>12</td><td>13</td><td>13</td><td>12</td></tr>
-          <tr><td>University</td><td id="University-2025-cell">—</td><td>9</td><td>4</td><td>4</td><td>8</td><td>5</td><td>6</td><td>6</td><td>5</td></tr>
-          <tr><td>Engineering</td><td id="Engineering-2025-cell">—</td><td>12</td><td>10</td><td>11</td><td>17</td><td>17</td><td>14</td><td>12</td><td>9</td></tr>
-          <tr><td>Research</td><td id="Research-2025-cell">—</td><td>21</td><td>19</td><td>13</td><td>17</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-          <tr><td>Pharmacy</td><td id="Pharmacy-2025-cell">—</td><td>18</td><td>18</td><td>18</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-          <tr><td>State Public University</td><td id="StatePublicUniversity-2025-cell">—</td><td>2</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-          <tr><td>Architecture</td><td id="Architecture-2025-cell">—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-        </tbody>
-      </table>
+    <!-- TLR Section -->
+    <div class="metrics-section fade-in">
+      <div class="section-title">
+        <h3>📚 Teaching, Learning & Resources (TLR)</h3>
+        <div class="total-score">68.83 / 100</div>
+      </div>
+      <div class="metrics-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Sub-metric</th>
+              <th>Max Score</th>
+              <th>2024 Score</th>
+              <th>Performance</th>
+              <th>Analysis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Student Strength (SS)</td>
+              <td>20</td>
+              <td>
+                <div class="score-bar">
+                  <span class="score-value">17.15</span>
+                  <div class="bar-container">
+                    <div class="bar-fill bar-excellent" style="width: 85.75%"></div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="score-value" style="color: #2ecc71;">Strong</span></td>
+              <td class="analysis-cell">Strong enrolment and student intake.</td>
+            </tr>
+            <tr>
+              <td>Faculty–Student Ratio (FSR)</td>
+              <td>25</td>
+              <td>
+                <div class="score-bar">
+                  <span class="score-value">21.66</span>
+                  <div class="bar-container">
+                    <div class="bar-fill bar-excellent" style="width: 86.64%"></div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="score-value" style="color: #2ecc71;">Excellent</span></td>
+              <td class="analysis-cell">Very strong, faculty strength well aligned with student numbers.</td>
+            </tr>
+            <tr>
+              <td>Faculty Qualification (FQE)</td>
+              <td>20</td>
+              <td>
+                <div class="score-bar">
+                  <span class="score-value">16.67</span>
+                  <div class="bar-container">
+                    <div class="bar-fill bar-good" style="width: 83.35%"></div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="score-value" style="color: #3498db;">Good</span></td>
+              <td class="analysis-cell">Faculty quality and experience remain solid.</td>
+            </tr>
+            <tr>
+              <td>Financial Resources (FRU)</td>
+              <td>20</td>
+              <td>
+                <div class="score-bar">
+                  <span class="score-value">7.10</span>
+                  <div class="bar-container">
+                    <div class="bar-fill bar-weak" style="width: 35.5%"></div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="score-value" style="color: #e74c3c;">Weak</span></td>
+              <td class="analysis-cell">Weak area, underutilization of available funds.</td>
+            </tr>
+            <tr>
+              <td>Online Education (OE)</td>
+              <td>10</td>
+              <td>
+                <div class="score-bar">
+                  <span class="score-value">6.25</span>
+                  <div class="bar-container">
+                    <div class="bar-fill bar-average" style="width: 62.5%"></div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="score-value" style="color: #f39c12;">Average</span></td>
+              <td class="analysis-cell">Moderate; scope to expand digital teaching initiatives.</td>
+            </tr>
+            <tr>
+              <td>Research in Teaching (MIR)</td>
+              <td>5</td>
+              <td>
+                <div class="score-bar">
+                  <span class="score-value">—</span>
+                  <div class="bar-container">
+                    <div class="bar-fill" style="width: 0%; background: #bdc3c7;"></div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="score-value" style="color: #95a5a6;">N/A</span></td>
+              <td class="analysis-cell">Data not available/not reported.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <div class="charts fade-in">
+    <!-- RPC Section -->
+    <div class="metrics-section fade-in">
+      <div class="section-title">
+        <h3>🔬 Research & Professional Practice (RPC)</h3>
+        <div class="total-score">51.36 / 100</div>
+      </div>
+      <div class="metrics-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Sub-metric</th>
+              <th>Max Score</th>
+              <th>2024 Score</th>
+              <th>Performance</th>
+              <th>Analysis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Publications (PU)</td>
+              <td>30</td>
+              <td>
+                <div class="score-bar">
+                  <span class="score-value">19.75</span>
+                  <div class="bar-container">
+                    <div class="bar-fill bar-average" style="width: 65.83%"></div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="score-value" style="color: #f39c12;">Average</span></td>
+              <td class="analysis-cell">Publication volume and quality are reasonably strong.</td>
+            </tr>
+            <tr>
+              <td>Quality of Publications (QP)</td>
+              <td>30</td>
+              <td>
+                <div class="score-bar">
+                  <span class="score-value">20.07</span>
+                  <div class="bar-container">
+                    <div class="bar-fill bar-average" style="width: 66.9%"></div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="score-value" style="color: #f39c12;">Average</span></td>
+              <td class="analysis-cell">Good citation and impact record.</td>
+            </tr>
+            <tr>
+              <td>Patents/IPR (IPR)</td>
+              <td>15</td>
+              <td>
+                <div class="score-bar">
+                  <span class="score-value">2.50</span>
+                  <div class="bar-container">
+                    <div class="bar-fill bar-weak" style="width: 16.67%"></div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="score-value" style="color: #e74c3c;">Very Weak</span></td>
+              <td class="analysis-cell">Very weak, limited patents/IPR outcomes.</td>
+            </tr>
+            <tr>
+              <td>Projects & Practice (FPPP)</td>
+              <td>15</td>
+              <td>
+                <div class="score-bar">
+                  <span class="score-value">2.91</span>
+                  <div class="bar-container">
+                    <div class="bar-fill bar-weak" style="width: 19.4%"></div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="score-value" style="color: #e74c3c;">Very Weak</span></td>
+              <td class="analysis-cell">Low; consultancy and project funding need strengthening.</td>
+            </tr>
+            <tr>
+              <td>SDGs Performance (PSDGs)</td>
+              <td>10</td>
+              <td>
+                <div class="score-bar">
+                  <span class="score-value">6.13</span>
+                  <div class="bar-container">
+                    <div class="bar-fill bar-average" style="width: 61.3%"></div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="score-value" style="color: #f39c12;">Average</span></td>
+              <td class="analysis-cell">Moderate, with some initiatives in SDGs.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- GO Section -->
+    <div class="metrics-section fade-in">
+      <div class="section-title">
+        <h3>🎓 Graduation Outcomes (GO)</h3>
+        <div class="total-score">89.92 / 100</div>
+      </div>
+      <div class="metrics-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Sub-metric</th>
+              <th>Max Score</th>
+              <th>2024 Score</th>
+              <th>Performance</th>
+              <th>Analysis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Graduate Employability (GUE)</td>
+              <td>60</td>
+              <td>
+                <div class="score-bar">
+                  <span class="score-value">60.00</span>
+                  <div class="bar-container">
+                    <div class="bar-fill bar-excellent" style="width: 100%"></div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="score-value" style="color: #2ecc71;">Perfect</span></td>
+              <td class="analysis-cell">Excellent, full marks in employability and placements.</td>
+            </tr>
+            <tr>
+              <td>PhD Graduations (GPHD)</td>
+              <td>40</td>
+              <td>
+                <div class="score-bar">
+                  <span class="score-value">29.92</span>
+                  <div class="bar-container">
+                    <div class="bar-fill bar-good" style="width: 74.8%"></div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="score-value" style="color: #3498db;">Good</span></td>
+              <td class="analysis-cell">Strong, but scope to further raise PhD completion rates.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- OI Section -->
+    <div class="metrics-section fade-in">
+      <div class="section-title">
+        <h3>🌐 Outreach & Inclusivity (OI)</h3>
+        <div class="total-score">49.93 / 100</div>
+      </div>
+      <div class="metrics-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Sub-metric</th>
+              <th>Max Score</th>
+              <th>2024 Score</th>
+              <th>Performance</th>
+              <th>Analysis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Regional Diversity (RD)</td>
+              <td>30</td>
+              <td>
+                <div class="score-bar">
+                  <span class="score-value">1.20</span>
+                  <div class="bar-container">
+                    <div class="bar-fill bar-weak" style="width: 4%"></div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="score-value" style="color: #e74c3c;">Critical</span></td>
+              <td class="analysis-cell">Extremely weak, poor national diversity of students.</td>
+            </tr>
+            <tr>
+              <td>Women Diversity (WD)</td>
+              <td>30</td>
+              <td>
+                <div class="score-bar">
+                  <span class="score-value">23.04</span>
+                  <div class="bar-container">
+                    <div class="bar-fill bar-good" style="width: 76.8%"></div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="score-value" style="color: #3498db;">Strong</span></td>
+              <td class="analysis-cell">Strong participation of women students/faculty.</td>
+            </tr>
+            <tr>
+              <td>Economically Challenged (ESCS)</td>
+              <td>20</td>
+              <td>
+                <div class="score-bar">
+                  <span class="score-value">5.69</span>
+                  <div class="bar-container">
+                    <div class="bar-fill bar-average" style="width: 28.45%"></div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="score-value" style="color: #f39c12;">Weak</span></td>
+              <td class="analysis-cell">Moderate representation; can improve access for disadvantaged groups.</td>
+            </tr>
+            <tr>
+              <td>Physically Challenged (PCS)</td>
+              <td>20</td>
+              <td>
+                <div class="score-bar">
+                  <span class="score-value">20.00</span>
+                  <div class="bar-container">
+                    <div class="bar-fill bar-excellent" style="width: 100%"></div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="score-value" style="color: #2ecc71;">Perfect</span></td>
+              <td class="analysis-cell">Excellent inclusion of differently-abled students.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="charts-container fade-in">
       <div class="chart-container">
-        <h3>📈 NIRF JU Rankings Trend Analysis</h3>
-        <canvas id="nirfChart"></canvas>
-        <div class="legend">
-          <div class="legend-item">
-            <span style="background-color: #e74c3c"></span>
-            Overall
-          </div>
-          <div class="legend-item">
-            <span style="background-color: #3498db"></span>
-            University
-          </div>
-          <div class="legend-item">
-            <span style="background-color: #2ecc71"></span>
-            Engineering
-          </div>
-          <div class="legend-item">
-            <span style="background-color: #9b59b6"></span>
-            Research
-          </div>
-          <div class="legend-item">
-            <span style="background-color: #f39c12"></span>
-            Pharmacy
-          </div>
-          <div class="legend-item">
-            <span style="background-color: #1abc9c"></span>
-            State Public University
-          </div>
-          <div class="legend-item">
-            <span style="background-color: #8b4513"></span>
-            Architecture
-          </div>
+        <div class="chart-header">
+          <h3>📊 Category Performance Overview</h3>
+          <button onclick="downloadCategoryChart()" class="download-btn">📥 Download as JPEG</button>
         </div>
+        <canvas id="categoryChart"></canvas>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-header">
+          <h3>🎯 Sub-metrics Performance Heatmap</h3>
+          <button onclick="downloadHeatmapChart()" class="download-btn">📥 Download as JPEG</button>
+        </div>
+        <canvas id="heatmapChart"></canvas>
       </div>
     </div>
   </div>
 
   <script>
-    const labels = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
-
-    const data = {
-      labels: [...labels],
-      datasets: [
-        { label: 'Overall', data: [12, 13, 13, 12, 14, 12, 13, 17], borderColor: '#e74c3c', backgroundColor: 'rgba(231, 76, 60, 0.1)', fill: false, tension: 0.4 },
-        { label: 'University', data: [5, 6, 6, 5, 8, 4, 4, 9], borderColor: '#3498db', backgroundColor: 'rgba(52, 152, 219, 0.1)', fill: false, tension: 0.4 },
-        { label: 'Engineering', data: [9, 12, 14, 17, 17, 11, 10, 12], borderColor: '#2ecc71', backgroundColor: 'rgba(46, 204, 113, 0.1)', fill: false, tension: 0.4 },
-        { label: 'Research', data: [null, null, null, null, 17, 13, 19, 21], borderColor: '#9b59b6', backgroundColor: 'rgba(155, 89, 182, 0.1)', fill: false, tension: 0.4 },
-        { label: 'Pharmacy', data: [null, null, null, null, null, 18, 18, 18], borderColor: '#f39c12', backgroundColor: 'rgba(243, 156, 18, 0.1)', fill: false, tension: 0.4 },
-        { label: 'State Public University', data: [null, null, null, null, null, null, null, 2], borderColor: '#1abc9c', backgroundColor: 'rgba(26, 188, 156, 0.1)', fill: false, tension: 0.4 },
-        { label: 'Architecture', data: [null, null, null, null, null, null, null, null], borderColor: '#8b4513', backgroundColor: 'rgba(139, 69, 19, 0.1)', fill: false, tension: 0.4 }
-      ]
-    };
-
-    const config = {
-      type: 'line',
-      data: data,
+    // Category Performance Chart
+    const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+    const categoryChart = new Chart(categoryCtx, {
+      type: 'radar',
+      data: {
+        labels: ['TLR\n(68.83)', 'RPC\n(51.36)', 'GO\n(89.92)', 'OI\n(49.93)', 'PR\n(63.74)'],
+        datasets: [{
+          label: 'NIRF 2024 Scores',
+          data: [68.83, 51.36, 89.92, 49.93, 63.74],
+          backgroundColor: 'rgba(52, 152, 219, 0.2)',
+          borderColor: '#3498db',
+          borderWidth: 3,
+          pointBackgroundColor: '#2980b9',
+          pointBorderColor: '#fff',
+          pointBorderWidth: 2,
+          pointRadius: 6
+        }]
+      },
       options: {
         responsive: true,
-        plugins: { 
-          legend: { display: false },
-          tooltip: {
-            mode: 'index',
-            intersect: false,
-            backgroundColor: 'rgba(0,0,0,0.8)',
-            titleColor: '#fff',
-            bodyColor: '#fff',
-            cornerRadius: 8
-          }
+        plugins: {
+          legend: { display: false }
         },
         scales: {
-          y: {
-            reverse: true,
-            title: { 
-              display: true, 
-              text: 'Rank (Lower is Better)',
-              font: { size: 14, weight: '600' },
-              color: '#2c3e50'
+          r: {
+            angleLines: { display: true },
+            suggestedMin: 0,
+            suggestedMax: 100,
+            ticks: {
+              stepSize: 20,
+              font: { size: 12 }
             },
-            grid: {
-              color: 'rgba(0,0,0,0.05)'
+            pointLabels: {
+              font: { size: 11, weight: 'bold' }
             }
-          },
+          }
+        }
+      }
+    });
+
+    // Sub-metrics Performance Chart
+    const heatmapCtx = document.getElementById('heatmapChart').getContext('2d');
+    const heatmapChart = new Chart(heatmapCtx, {
+      type: 'bar',
+      data: {
+        labels: ['FSR', 'SS', 'FQE', 'GUE', 'GPHD', 'WD', 'PCS', 'QP', 'PU', 'OE', 'PSDGs', 'FRU', 'ESCS', 'FPPP', 'IPR', 'RD'],
+        datasets: [{
+          label: 'Performance %',
+          data: [86.64, 85.75, 83.35, 100, 74.8, 76.8, 100, 66.9, 65.83, 62.5, 61.3, 35.5, 28.45, 19.4, 16.67, 4],
+          backgroundColor: [
+            '#2ecc71', '#2ecc71', '#3498db', '#27ae60', '#3498db', '#3498db', '#27ae60', 
+            '#f39c12', '#f39c12', '#f39c12', '#f39c12', '#e74c3c', '#e74c3c', '#e74c3c', '#e74c3c', '#c0392b'
+          ],
+          borderRadius: 4,
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        indexAxis: 'y',
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
           x: {
+            beginAtZero: true,
+            max: 100,
             title: {
               display: true,
-              text: 'Year',
-              font: { size: 14, weight: '600' },
-              color: '#2c3e50'
-            },
-            grid: {
-              color: 'rgba(0,0,0,0.05)'
+              text: 'Performance Percentage (%)'
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Sub-metrics (Ranked by Performance)'
             }
           }
-        },
-        interaction: {
-          mode: 'nearest',
-          axis: 'x',
-          intersect: false
         }
       }
-    };
+    });
 
-    const chart = new Chart(document.getElementById('nirfChart'), config);
-
-    function update2025() {
-      const categories = ['Overall','University','Engineering','Research','Pharmacy','StatePublicUniversity','Architecture'];
-      let updated = false;
-      
-      categories.forEach((cat, idx) => {
-        const inputVal = document.getElementById(cat + '-2025').value;
-        const cell = document.getElementById(cat + '-2025-cell');
-        
-        if (inputVal) {
-          cell.innerText = inputVal;
-          cell.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
-          cell.style.color = 'white';
-          cell.style.fontWeight = '600';
-          
-          if (!data.labels.includes(2025)) {
-            data.labels.push(2025);
-          }
-          
-          // Update or add 2025 data
-          if (data.datasets[idx].data.length === labels.length) {
-            data.datasets[idx].data.push(parseInt(inputVal));
-          } else {
-            data.datasets[idx].data[data.datasets[idx].data.length - 1] = parseInt(inputVal);
-          }
-          updated = true;
-        } else {
-          if (data.datasets[idx].data.length === labels.length) {
-            data.datasets[idx].data.push(null);
-          }
-        }
-      });
-      
-      if (updated) {
-        chart.update();
-        
-        // Show success feedback
-        const button = event.target;
-        const originalText = button.innerHTML;
-        button.innerHTML = '✅ Updated!';
-        button.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
-        
-        setTimeout(() => {
-          button.innerHTML = originalText;
-          button.style.background = 'linear-gradient(135deg, #3498db 0%, #2980b9 100%)';
-        }, 2000);
-      }
+    // Download functions
+    function downloadCategoryChart() {
+      downloadChart(categoryChart, 'JU_NIRF_Category_Performance');
     }
 
-    function downloadChart() {
-      // Get the existing chart canvas
-      const originalCanvas = document.getElementById('nirfChart');
-      
-      // Create a new canvas for the download with higher resolution
+    function downloadHeatmapChart() {
+      downloadChart(heatmapChart, 'JU_NIRF_Submetrics_Performance');
+    }
+
+    function downloadChart(chart, filename) {
       const downloadCanvas = document.createElement('canvas');
       const ctx = downloadCanvas.getContext('2d');
       
-      // Set canvas size for high quality output
       downloadCanvas.width = 1200;
       downloadCanvas.height = 800;
       
@@ -595,72 +811,57 @@
       ctx.fillStyle = '#1e3c72';
       ctx.font = 'bold 32px Arial, sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText('Jadavpur University - NIRF Rankings', downloadCanvas.width / 2, 50);
+      ctx.fillText('Jadavpur University - NIRF 2024 Metrics Analysis', downloadCanvas.width / 2, 50);
       
-      ctx.fillStyle = '#2a5298';
-      ctx.font = '20px Arial, sans-serif';
-      ctx.fillText('Trend Analysis', downloadCanvas.width / 2, 85);
+      // Get chart as image
+      const chartImage = chart.toBase64Image('image/jpeg', 1);
+      const img = new Image();
       
-      // Calculate the chart area
-      const chartArea = {
-        x: 80,
-        y: 120,
-        width: downloadCanvas.width - 160,
-        height: downloadCanvas.height - 200
-      };
-      
-      // Draw chart background
-      ctx.fillStyle = '#f8f9fa';
-      ctx.fillRect(chartArea.x, chartArea.y, chartArea.width, chartArea.height);
-      
-      // Copy the original chart to the download canvas
-      try {
-        ctx.drawImage(originalCanvas, chartArea.x + 40, chartArea.y + 20, chartArea.width - 80, chartArea.height - 100);
-      } catch (error) {
-        console.log('Direct copy failed, using alternative method');
-        // Alternative: Get chart as base64 image
-        const chartImage = chart.toBase64Image('image/jpeg', 1);
-        const img = new Image();
-        img.onload = function() {
-          ctx.drawImage(img, chartArea.x + 40, chartArea.y + 20, chartArea.width - 80, chartArea.height - 100);
-          triggerDownload();
-        };
-        img.src = chartImage;
-        return;
-      }
-      
-      triggerDownload();
-      
-      function triggerDownload() {
+      img.onload = function() {
+        // Draw chart image
+        ctx.drawImage(img, 100, 100, downloadCanvas.width - 200, downloadCanvas.height - 150);
+        
         // Convert to blob and download
         downloadCanvas.toBlob(function(blob) {
           const url = URL.createObjectURL(blob);
           const downloadLink = document.createElement('a');
           const date = new Date();
           downloadLink.href = url;
-          downloadLink.download = `JU_NIRF_Rankings_${date.getFullYear()}_${String(date.getMonth() + 1).padStart(2, '0')}_${String(date.getDate()).padStart(2, '0')}.jpg`;
+          downloadLink.download = `${filename}_${date.getFullYear()}_${String(date.getMonth() + 1).padStart(2, '0')}_${String(date.getDate()).padStart(2, '0')}.jpg`;
           
-          // Trigger download
           document.body.appendChild(downloadLink);
           downloadLink.click();
           document.body.removeChild(downloadLink);
           
-          // Clean up
           URL.revokeObjectURL(url);
           
           // Show success feedback
-          const button = document.querySelector('.download-btn');
+          const button = event.target;
           const originalText = button.innerHTML;
           button.innerHTML = '✅ Downloaded!';
-          button.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
           
           setTimeout(() => {
             button.innerHTML = originalText;
-            button.style.background = 'linear-gradient(135deg, #2ecc71 0%, #27ae60 100%)';
           }, 2000);
         }, 'image/jpeg', 0.95);
-      }
+      };
+      
+      img.src = chartImage;
     }
+
+    // Initialize animations on load
+    window.addEventListener('load', function() {
+      // Animate score bars
+      const bars = document.querySelectorAll('.bar-fill');
+      bars.forEach((bar, index) => {
+        setTimeout(() => {
+          const width = bar.style.width;
+          bar.style.width = '0%';
+          bar.offsetHeight; // Trigger reflow
+          bar.style.width = width;
+        }, index * 100);
+      });
+    });
   </script>
 </body>
 </html>
