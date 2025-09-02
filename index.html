@@ -140,19 +140,36 @@
           </div>
         </div>
       </div>
-
-      </div>
-  			<a href="ju_nirf_metrics_dashboard.html" 
-  			   style="display:inline-block; 
-  				  padding:10px 20px; 
-  				  background-color:#4CAF50; 
-  				  color:white; 
-  				  text-decoration:none; 
-  				  font-size:16px; 
-  				  border-radius:8px; 
-  				  font-family:Arial, sans-serif;">Go To Detailed Analysis: 2024 Ranking</a>
-		</div>
     </div>
+	<div>
+	  <a href="ju_nirf_metrics_dashboard.html" 
+           style="display: inline-flex; 
+                  align-items: center; 
+                  gap: 0.75rem; 
+                  padding: 1rem 2.5rem; 
+                  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); 
+                  color: white; 
+                  text-decoration: none; 
+                  font-size: 1.1rem; 
+                  font-weight: 600; 
+                  border-radius: 50px; 
+                  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+                  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+                  box-shadow: 0 8px 25px rgba(46, 204, 113, 0.4);"
+           onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; 
+                        this.style.boxShadow='0 15px 40px rgba(46, 204, 113, 0.6)'; 
+                        this.style.background='linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)';"
+           onmouseout="this.style.transform='translateY(0) scale(1)'; 
+                       this.style.boxShadow='0 8px 25px rgba(46, 204, 113, 0.4)'; 
+                       this.style.background='linear-gradient(135deg, #2ecc71 0%, #27ae60 100%)';"
+           onmousedown="this.style.transform='translateY(-1px) scale(1.02)';"
+           onmouseup="this.style.transform='translateY(-3px) scale(1.05)';">
+          <span>Go To Detailed Analysis: 2024 Ranking</span>
+          <span style="font-size: 1.3rem; transition: transform 0.3s ease;" 
+                onmouseover="this.style.transform='translateX(5px)';"
+                onmouseout="this.style.transform='translateX(0)';">→</span>
+        </a>
+	</div>  
   </div>
 
   <script>
