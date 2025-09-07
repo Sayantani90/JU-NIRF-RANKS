@@ -1,146 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jadavpur University — NIRF Ranks Dashboard</title>
+  <title>Jadavpur University — NIRF Rankings (2017—2025)</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Link external CSS -->
   <link rel="stylesheet" href="styles.css">
 </head>
 
-  <body>
+<body>
   <div class="header">
     <h1>Jadavpur University</h1>
-    <p>NIRF Rankings Dashboard (2017 Onwards)</p>
+    <p>NIRF Rankings 2017 onwards</p>
   </div>
 
   <div class="container">
-    <div class="stats-grid">
-      <div class="stat-card">
-        <h4>Best Overall Rank</h4>
-        <div class="number" id="best-overall-rank">12</div>
-        <div class="subtitle" id="best-overall-years">2017, 2020, 2022</div>
+    <!-- Best Rank Cards -->
+    <div id="best-cards" class="stats-grid"></div>
+
+    <!-- Ranks Table -->
+<div class="table-container">
+  <table id="ranksTable" aria-label="NIRF category ranks by year">
+    <thead>
+      <tr>
+        <th>CATEGORY</th>
+        <th class="highlight-year">2025</th>
+        <th>2024</th>
+        <th>2023</th>
+        <th>2022</th>
+        <th>2021</th>
+        <th>2020</th>
+        <th>2019</th>
+        <th>2018</th>
+        <th>2017</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Overall</td><td class="highlight-year">18</td><td>17</td><td>13</td><td>12</td><td>14</td><td>12</td><td>13</td><td>13</td><td>12</td></tr>
+      <tr><td>University</td><td class="highlight-year">9</td><td>9</td><td>4</td><td>4</td><td>8</td><td>5</td><td>6</td><td>6</td><td>5</td></tr>
+      <tr><td>Engineering</td><td class="highlight-year">18</td><td>12</td><td>10</td><td>11</td><td>17</td><td>17</td><td>14</td><td>12</td><td>9</td></tr>
+      <tr><td>Research</td><td class="highlight-year">23</td><td>21</td><td>19</td><td>13</td><td>17</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Pharmacy</td><td class="highlight-year">24</td><td>18</td><td>18</td><td>18</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>State Public University</td><td class="highlight-year">1</td><td>2</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Architecture</td><td class="highlight-year">16</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    </tbody>
+  </table>
+</div>
+
+    <!-- Chart -->
+    <div class="chart-container">
+      <div class="chart-header">
+        <h3>📈 NIRF Rankings Trend (2017—2025)</h3>
+        <button class="download-btn" id="dlBtn">Download as JPEG</button>
       </div>
-      <div class="stat-card">
-        <h4>Best University Rank</h4>
-        <div class="number" id="best-university-rank">4</div>
-        <div class="subtitle" id="best-university-years">2022, 2023</div>
+      <canvas id="trendChart"></canvas>
+      <div class="legend">
+        <div class="legend-item"><span style="background:#e74c3c"></span> Overall</div>
+        <div class="legend-item"><span style="background:#3498db"></span> University</div>
+        <div class="legend-item"><span style="background:#2ecc71"></span> Engineering</div>
+        <div class="legend-item"><span style="background:#8e44ad"></span> Research</div>
+        <div class="legend-item"><span style="background:#f39c12"></span> Pharmacy</div>
+        <div class="legend-item"><span style="background:#1abc9c"></span> State Public Univ.</div>
+        <div class="legend-item"><span style="background:#8e6e53"></span> Architecture</div>
       </div>
-      <div class="stat-card">
-        <h4>Best Engineering Rank</h4>
-        <div class="number" id="best-engineering-rank">9</div>
-        <div class="subtitle" id="best-engineering-years">2017</div>
-      </div>
-      <div class="stat-card">
-        <h4>Best State Public University Rank</h4>
-        <div class="number" id="best-research-rank">1</div>
-        <div class="subtitle" id="best-research-years">2025</div>
-      </div>
-    </div>
-<!--
-    <div class="input-section fade-in">
-      <h3>📊 Enter NIRF 2025 Rankings </h3>
-      <div class="input-grid">
-        <div class="input-group">
-          <label for="Overall-2025">Overall Ranking</label>
-          <input type="number" id="Overall-2025" placeholder="Enter rank..." />
-        </div>
-        <div class="input-group">
-          <label for="University-2025">University Ranking</label>
-          <input type="number" id="University-2025" placeholder="Enter rank..." />
-        </div>
-        <div class="input-group">
-          <label for="Engineering-2025">Engineering Ranking</label>
-          <input type="number" id="Engineering-2025" placeholder="Enter rank..." />
-        </div>
-        <div class="input-group">
-          <label for="Research-2025">Research Ranking</label>
-          <input type="number" id="Research-2025" placeholder="Enter rank..." />
-        </div>
-        <div class="input-group">
-          <label for="Pharmacy-2025">Pharmacy Ranking</label>
-          <input type="number" id="Pharmacy-2025" placeholder="Enter rank..." />
-        </div>
-        <div class="input-group">
-          <label for="StatePublicUniversity-2025">State Public University</label>
-          <input type="number" id="StatePublicUniversity-2025" placeholder="Enter rank..." />
-        </div>
-        <div class="input-group">
-          <label for="Architecture-2025">Architecture Ranking</label>
-          <input type="number" id="Architecture-2025" placeholder="Enter rank..." />
-        </div>
-      </div>
-      <button onclick="update2025()">🚀 Update Rankings</button>
-    </div>
--->
-    <div class="table-container fade-in">
-      <table id="ranksTable">
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>2025</th>
-            <th>2024</th>
-            <th>2023</th>
-            <th>2022</th>
-            <th>2021</th>
-            <th>2020</th>
-            <th>2019</th>
-            <th>2018</th>
-            <th>2017</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Overall</td><td id="Overall-2025-cell">18</td><td>17</td><td>13</td><td>12</td><td>14</td><td>12</td><td>13</td><td>13</td><td>12</td></tr>
-          <tr><td>University</td><td id="University-2025-cell">9</td><td>9</td><td>4</td><td>4</td><td>8</td><td>5</td><td>6</td><td>6</td><td>5</td></tr>
-          <tr><td>Engineering</td><td id="Engineering-2025-cell">18</td><td>12</td><td>10</td><td>11</td><td>17</td><td>17</td><td>14</td><td>12</td><td>9</td></tr>
-          <tr><td>Research</td><td id="Research-2025-cell">23</td><td>21</td><td>19</td><td>13</td><td>17</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-          <tr><td>Pharmacy</td><td id="Pharmacy-2025-cell">24</td><td>18</td><td>18</td><td>18</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-          <tr><td>State Public University</td><td id="StatePublicUniversity-2025-cell">1</td><td>2</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-          <tr><td>Architecture</td><td id="Architecture-2025-cell">16</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-        </tbody>
-      </table>
     </div>
 
-    <div class="charts fade-in">
-      <div class="chart-container">
-        <div class="chart-header">
-          <h3>📈 NIRF Rankings Trend Analysis</h3>
-          <button onclick="downloadChart()" class="download-btn">📥 Download as JPEG</button>
-        </div>
-        <canvas id="nirfChart"></canvas>
-        <div class="legend">
-          <div class="legend-item">
-            <span style="background-color: #e74c3c"></span>
-            Overall
-          </div>
-          <div class="legend-item">
-            <span style="background-color: #3498db"></span>
-            University
-          </div>
-          <div class="legend-item">
-            <span style="background-color: #2ecc71"></span>
-            Engineering
-          </div>
-          <div class="legend-item">
-            <span style="background-color: #9b59b6"></span>
-            Research
-          </div>
-          <div class="legend-item">
-            <span style="background-color: #f39c12"></span>
-            Pharmacy
-          </div>
-          <div class="legend-item">
-            <span style="background-color: #1abc9c"></span>
-            State Public University
-          </div>
-          <div class="legend-item">
-            <span style="background-color: #8b4513"></span>
-            Architecture
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- Navigation Section -->
 	<div>
 	  <a href="ju_nirf_metrics_2025.html" 
            style="display: inline-flex; 
@@ -170,289 +97,99 @@
                 onmouseout="this.style.transform='translateX(0)';">→</span>
         </a>
 	</div>  
-  </div>
 
+	
   <script>
-    // Historical data for finding best ranks
-    const historicalData = {
-      Overall: [12, 13, 13, 12, 14, 12, 13, 17], // 2017-2024
-      University: [5, 6, 6, 5, 8, 4, 4, 9], // 2017-2024
-      Engineering: [9, 12, 14, 17, 17, 11, 10, 12], // 2017-2024
-      Research: [null, null, null, null, 17, 13, 19, 21], // 2017-2024
-      Pharmacy: [null, null, null, null, null, 18, 18, 18], // 2017-2024
-      StatePublicUniversity: [null, null, null, null, null, null, null, 2], // 2017-2024
-      Architecture: [null, null, null, null, null, null, null, null] // 2017-2024
-    };
+    
 
-    const years = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
-
-    function findBestRankAndYears(category, includeNew2025 = false, new2025Value = null) {
-      let data = [...historicalData[category]];
-      let yearsList = [...years];
-      
-      if (includeNew2025 && new2025Value) {
-        data.push(new2025Value);
-        yearsList.push(2025);
-      }
-      
-      // Filter out null values and find minimum (best rank)
-      const validData = data.map((rank, index) => ({ rank, year: yearsList[index] }))
-                           .filter(item => item.rank !== null);
-      
-      if (validData.length === 0) return { bestRank: null, bestYears: [] };
-      
-      const bestRank = Math.min(...validData.map(item => item.rank));
-      const bestYears = validData.filter(item => item.rank === bestRank)
-                                .map(item => item.year);
-      
-      return { bestRank, bestYears };
+    // ===== Utilities =====
+    const YEARS = [2017,2018,2019,2020,2021,2022,2023,2024,2025];
+    function parseCell(txt){ const t=String(txt).trim(); if(!t || t==='—' || t==='-') return null; const n=Number(t); return Number.isFinite(n)? n : null; }
+    function toAscending(arr){ return [...arr].reverse(); }
+    function getRowData(tr){
+      const tds=[...tr.querySelectorAll('td')];
+      const name=tds[0].textContent.trim();
+      const values=tds.slice(1).map(td=>parseCell(td.textContent));
+      return { name, valuesDesc: values, valuesAsc: toAscending(values) };
     }
 
-    function updateBestRankCard(category, bestRank, bestYears, isUpdated = false) {
-      const categoryMap = {
-        Overall: 'overall',
-        University: 'university', 
-        Engineering: 'engineering',
-        Research: 'research'
-      };
-      
-      const key = categoryMap[category];
-      if (!key) return;
-      
-      const rankElement = document.getElementById(`best-${key}-rank`);
-      const yearsElement = document.getElementById(`best-${key}-years`);
-      const cardElement = rankElement.closest('.stat-card');
-      
-      if (rankElement && yearsElement) {
-        rankElement.textContent = bestRank;
-        yearsElement.textContent = bestYears.join(', ');
-        
-        if (isUpdated) {
-          cardElement.classList.add('updated');
-          setTimeout(() => {
-            cardElement.classList.remove('updated');
-          }, 3000);
-        }
-      }
-    }
+    const targetBest = new Set(['Overall','University','Engineering','Research','State Public University']);
+    const tbody = document.querySelector('#ranksTable tbody');
+    const rows = [...tbody.querySelectorAll('tr')];
+    const data = rows.map(getRowData);
+    const bestCardsWrap = document.getElementById('best-cards');
+    bestCardsWrap.innerHTML = '';
 
-    const labels = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+    data.forEach(({name, valuesDesc})=>{
+      if(!targetBest.has(name)) return;
+      const valid = valuesDesc.filter(v=>v!==null);
+      if (valid.length === 0) return;
+      const best = Math.min(...valid);
+      const yearsDesc = [2025,2024,2023,2022,2021,2020,2019,2018,2017];
+      const bestYears = yearsDesc.filter((yr,idx)=>valuesDesc[idx]===best);
+      const card = document.createElement('div');
+      card.className='stat-card fade-in';
+      card.innerHTML = `<h4>BEST ${name.toUpperCase()} RANK</h4>
+                        <div class="number">${best}</div>
+                        <div class="subtitle">${bestYears.join(', ')}</div>`;
+      bestCardsWrap.appendChild(card);
+    });
 
-    const data = {
-      labels: [...labels],
-      datasets: [
-        { label: 'Overall', data: [12, 13, 13, 12, 14, 12, 13, 17], borderColor: '#e74c3c', backgroundColor: 'rgba(231, 76, 60, 0.1)', fill: false, tension: 0.4 },
-        { label: 'University', data: [5, 6, 6, 5, 8, 4, 4, 9], borderColor: '#3498db', backgroundColor: 'rgba(52, 152, 219, 0.1)', fill: false, tension: 0.4 },
-        { label: 'Engineering', data: [9, 12, 14, 17, 17, 11, 10, 12], borderColor: '#2ecc71', backgroundColor: 'rgba(46, 204, 113, 0.1)', fill: false, tension: 0.4 },
-        { label: 'Research', data: [null, null, null, null, 17, 13, 19, 21], borderColor: '#9b59b6', backgroundColor: 'rgba(155, 89, 182, 0.1)', fill: false, tension: 0.4 },
-        { label: 'Pharmacy', data: [null, null, null, null, null, 18, 18, 18], borderColor: '#f39c12', backgroundColor: 'rgba(243, 156, 18, 0.1)', fill: false, tension: 0.4 },
-        { label: 'State Public University', data: [null, null, null, null, null, null, null, 2], borderColor: '#1abc9c', backgroundColor: 'rgba(26, 188, 156, 0.1)', fill: false, tension: 0.4 },
-        { label: 'Architecture', data: [null, null, null, null, null, null, null, null], borderColor: '#8b4513', backgroundColor: 'rgba(139, 69, 19, 0.1)', fill: false, tension: 0.4 }
-      ]
+    const COLORS = {
+      'Overall': '#e74c3c',
+      'University': '#3498db',
+      'Engineering': '#2ecc71',
+      'Research': '#8e44ad',
+      'Pharmacy': '#f39c12',
+      'State Public University': '#1abc9c',
+      'Architecture': '#8e6e53',
     };
 
-    const config = {
-      type: 'line',
-      data: data,
-      options: {
-        responsive: true,
-        plugins: { 
-          legend: { display: false },
-          tooltip: {
-            mode: 'index',
-            intersect: false,
-            backgroundColor: 'rgba(0,0,0,0.8)',
-            titleColor: '#fff',
-            bodyColor: '#fff',
-            cornerRadius: 8
-          }
-        },
-        scales: {
-          y: {
-            reverse: true,
-            title: { 
-              display: true, 
-              text: 'Rank',
-              font: { size: 14, weight: '600' },
-              color: '#2c3e50'
-            },
-            grid: {
-              color: 'rgba(0,0,0,0.05)'
-            }
-          },
-          x: {
-            title: {
-              display: true,
-              text: 'Year',
-              font: { size: 14, weight: '600' },
-              color: '#2c3e50'
-            },
-            grid: {
-              color: 'rgba(0,0,0,0.05)'
-            }
-          }
-        },
-        interaction: {
-          mode: 'nearest',
-          axis: 'x',
-          intersect: false
-        }
-      }
-    };
+    const datasets = data.map(({name, valuesAsc})=> ({
+      label: name,
+      data: valuesAsc.map(v=>v===null? null : v),
+      borderColor: COLORS[name] || '#555',
+      backgroundColor: (COLORS[name] || '#555') + '20',
+      spanGaps: true,
+      tension: 0.3,
+      pointRadius: 4,
+      pointHoverRadius: 6,
+      borderWidth: 2.5,
+      pointBackgroundColor: COLORS[name] || '#555',
+      pointBorderColor: '#fff',
+      pointBorderWidth: 2,
+    }));
 
-    const chart = new Chart(document.getElementById('nirfChart'), config);
-
-    function update2025() {
-      const categories = ['Overall','University','Engineering','Research','Pharmacy','StatePublicUniversity','Architecture'];
-      let updated = false;
-      
-      categories.forEach((cat, idx) => {
-        const inputVal = document.getElementById(cat + '-2025').value;
-        const cell = document.getElementById(cat + '-2025-cell');
-        
-        if (inputVal) {
-          const newRank = parseInt(inputVal);
-          cell.innerText = newRank;
-          cell.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
-          cell.style.color = 'white';
-          cell.style.fontWeight = '600';
-          
-          if (!data.labels.includes(2025)) {
-            data.labels.push(2025);
-          }
-          
-          // Update or add 2025 data
-          if (data.datasets[idx].data.length === labels.length) {
-            data.datasets[idx].data.push(newRank);
-          } else {
-            data.datasets[idx].data[data.datasets[idx].data.length - 1] = newRank;
-          }
-          
-          // Check if this new rank is better than historical best for top 4 categories
-          if (['Overall', 'University', 'Engineering', 'Research'].includes(cat)) {
-            const currentBest = findBestRankAndYears(cat, false);
-            const newBest = findBestRankAndYears(cat, true, newRank);
-            
-            // If the new 2025 rank is better (lower number) than the previous best
-            if (newBest.bestRank < currentBest.bestRank) {
-              updateBestRankCard(cat, newBest.bestRank, newBest.bestYears, true);
-            }
-            // If it ties with the best rank, update the years list
-            else if (newBest.bestRank === currentBest.bestRank && newBest.bestYears.length > currentBest.bestYears.length) {
-              updateBestRankCard(cat, newBest.bestRank, newBest.bestYears, true);
-            }
-          }
-          
-          updated = true;
-        } else {
-          if (data.datasets[idx].data.length === labels.length) {
-            data.datasets[idx].data.push(null);
+    const ctx = document.getElementById('trendChart').getContext('2d');
+    let chart;
+    try {
+      chart = new Chart(ctx, {
+        type: 'line',
+        data: { labels: YEARS, datasets },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          interaction: { mode: 'nearest', intersect: false },
+          scales: {
+            y: { reverse: true, min: 0, max: 30, ticks: { stepSize: 5 } },
+            x: { title: { display: true, text: 'Year' } }
           }
         }
       });
-      
-      if (updated) {
-        chart.update();
-        
-        // Show success feedback
-        const button = event.target;
-        const originalText = button.innerHTML;
-        button.innerHTML = '✅ Updated!';
-        button.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
-        
-        setTimeout(() => {
-          button.innerHTML = originalText;
-          button.style.background = 'linear-gradient(135deg, #3498db 0%, #2980b9 100%)';
-        }, 2000);
-      }
+    } catch (error) {
+      console.error('Chart error:', error);
     }
 
-    function downloadChart() {
-      // Get the existing chart canvas
-      const originalCanvas = document.getElementById('nirfChart');
-      
-      // Create a new canvas for the download with higher resolution
-      const downloadCanvas = document.createElement('canvas');
-      const ctx = downloadCanvas.getContext('2d');
-      
-      // Set canvas size for high quality output
-      downloadCanvas.width = 1200;
-      downloadCanvas.height = 800;
-      
-      // Fill with white background
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0, 0, downloadCanvas.width, downloadCanvas.height);
-      
-      // Add header text
-      ctx.fillStyle = '#1e3c72';
-      ctx.font = 'bold 32px Arial, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText('Jadavpur University - NIRF Rankings', downloadCanvas.width / 2, 50);
-      
-      ctx.fillStyle = '#2a5298';
-      ctx.font = '20px Arial, sans-serif';
-      ctx.fillText('Trend Analysis (2017 Onwards)', downloadCanvas.width / 2, 85);
-      
-      // Calculate the chart area
-      const chartArea = {
-        x: 80,
-        y: 120,
-        width: downloadCanvas.width - 160,
-        height: downloadCanvas.height - 200
-      };
-      
-      // Draw chart background
-      ctx.fillStyle = '#f8f9fa';
-      ctx.fillRect(chartArea.x, chartArea.y, chartArea.width, chartArea.height);
-      
-      // Copy the original chart to the download canvas
-      try {
-        ctx.drawImage(originalCanvas, chartArea.x + 40, chartArea.y + 20, chartArea.width - 80, chartArea.height - 100);
-      } catch (error) {
-        console.log('Direct copy failed, using alternative method');
-        // Alternative: Get chart as base64 image
-        const chartImage = chart.toBase64Image('image/jpeg', 1);
-        const img = new Image();
-        img.onload = function() {
-          ctx.drawImage(img, chartArea.x + 40, chartArea.y + 20, chartArea.width - 80, chartArea.height - 100);
-          triggerDownload();
-        };
-        img.src = chartImage;
-        return;
-      }
-      
-      triggerDownload();
-      
-      function triggerDownload() {
-        // Convert to blob and download
-        downloadCanvas.toBlob(function(blob) {
-          const url = URL.createObjectURL(blob);
-          const downloadLink = document.createElement('a');
-          const date = new Date();
-          downloadLink.href = url;
-          downloadLink.download = `JU_NIRF_Rankings_${date.getFullYear()}_${String(date.getMonth() + 1).padStart(2, '0')}_${String(date.getDate()).padStart(2, '0')}.jpg`;
-          
-          // Trigger download
-          document.body.appendChild(downloadLink);
-          downloadLink.click();
-          document.body.removeChild(downloadLink);
-          
-          // Clean up
-          URL.revokeObjectURL(url);
-          
-          // Show success feedback
-          const button = document.querySelector('.download-btn');
-          const originalText = button.innerHTML;
-          button.innerHTML = '✅ Downloaded!';
-          button.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
-          
-          setTimeout(() => {
-            button.innerHTML = originalText;
-            button.style.background = 'linear-gradient(135deg, #2ecc71 0%, #27ae60 100%)';
-          }, 2000);
-        }, 'image/jpeg', 0.95);
-      }
-    }
+    document.getElementById('dlBtn').addEventListener('click', ()=>{
+      if (!chart) return alert('Chart not available');
+      const link = document.createElement('a');
+      link.download = 'ju_nirf_trend_2017_2025.jpg';
+      link.href = chart.toBase64Image('image/jpeg', 1.0);
+      link.click();
+    });
+
+    
   </script>
 </body>
 </html>
