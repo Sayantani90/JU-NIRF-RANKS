@@ -15,7 +15,8 @@
     .overall-score { background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white; padding: 2rem; border-radius: 15px; text-align: center; margin-bottom: 2rem; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
     .overall-score h2 { font-size: 3rem; margin-bottom: 0.5rem; font-weight: 700; }
     .overall-score p { font-size: 1.2rem; opacity: 0.9; }
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+    .overall-rank { font-size: 1.5rem; margin-top: 0.5rem; font-weight: 700; color: #27ae60; }
+	.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
     .stat-card { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); text-align: center; border-left: 5px solid; }
     .stat-card.excellent { border-left-color: #2ecc71; }
     .stat-card.good { border-left-color: #3498db; }
@@ -36,6 +37,10 @@
     .improved { color: #27ae60; font-weight: 600; }
     .declined { color: green; font-weight: 600; }
     .stable { color: #7f8c8d; font-weight: 600; }
+    .rank-top { color: #27ae60; font-weight: 700; }
+    .rank-good { color: #f39c12; font-weight: 700; }
+    .rank-weak { color: #e74c3c; font-weight: 700; }
+	.rank-thisyr { color: purple; font-weight: 500; }
     .charts-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 2rem; margin-top: 2rem; }
     .chart-container { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
     .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
@@ -48,38 +53,11 @@
     <p>NIRF 2025 — Detailed Metrics Analysis Dashboard</p>
   </div>
 
-  <div class="container">
+    <div class="container">
     <div class="overall-score">
       <h2>65.42</h2>
-      <p>Overall NIRF Score 2025 — Performance compared with 2024 (65.39): <span class="stable">Stable</span></p>
-    </div>
-
-    <div class="stats-grid">
-      <div class="stat-card good">
-        <h4>Teaching, Learning & Resources (TLR)</h4>
-        <div class="score">71.62</div>
-        <div class="subtitle"><span class="improved">Improved vs 2024 (68.83)</span></div>
-      </div>
-      <div class="stat-card average">
-        <h4>Research & Professional Practice (RPC)</h4>
-        <div class="score">52.19</div>
-        <div class="subtitle"><span class="stable">Slightly better than 2024 (51.36)</span></div>
-      </div>
-      <div class="stat-card excellent">
-        <h4>Graduation Outcomes (GO)</h4>
-        <div class="score">87.81</div>
-        <div class="subtitle"><span class="declined">Declined vs 2024 (89.92)</span></div>
-      </div>
-      <div class="stat-card average">
-        <h4>Outreach & Inclusivity (OI)</h4>
-        <div class="score">52.34</div>
-        <div class="subtitle"><span class="improved">Improved vs 2024 (49.93)</span></div>
-      </div>
-      <div class="stat-card good">
-        <h4>Perception (PR)</h4>
-        <div class="score">54.87</div>
-        <div class="subtitle"><span class="declined">Dropped from 2024 (63.74)</span></div>
-      </div>
+      <p>Overall NIRF Score 2025 — Performance compared with 2024 (65.39) & Top 10 Universities</p>
+      <div class="overall-rank">JU’s Overall Position: <span class="rank-weak">9th</span> in Top Universities</div>
     </div>
 
     <!-- TLR Section -->
@@ -91,14 +69,14 @@
       <div class="metrics-table">
         <table>
           <thead>
-            <tr><th>Sub-metric</th><th>Max</th><th>2025</th><th>2024</th><th>Analysis</th></tr>
+            <tr><th>Sub-metric</th><th>Max</th><th>2025</th><th>2024</th><th>Analysis</th><th>JU’s Position in Top 10</th></tr>
           </thead>
           <tbody>
-            <tr><td>Student Strength (SS)</td><td>20</td><td>17.46</td><td>17.15</td><td class="analysis-cell"><span class="improved">Improved</span>, stable strong intake.</td></tr>
-            <tr><td>Faculty–Student Ratio (FSR)</td><td>25</td><td>24.41</td><td>21.66</td><td class="analysis-cell"><span class="improved">Improved</span> significantly, excellent alignment now.</td></tr>
-            <tr><td>Faculty Qualification (FQE)</td><td>20</td><td>18.24</td><td>16.67</td><td class="analysis-cell"><span class="improved">Improved</span>, stronger faculty credentials.</td></tr>
-            <tr><td>Financial Resources (FRU)</td><td>20</td><td>6.38</td><td>7.10</td><td class="analysis-cell"><span class="declined">Declined</span>, weaker utilization of funds.</td></tr>
-            <tr><td>OE + MIR</td><td>15</td><td>5.13</td><td>6.25 + N/A</td><td class="analysis-cell"><span class="declined">Declined</span>, online education weaker.</td></tr>
+            <tr><td>Student Strength (SS)</td><td>20</td><td class="rank-thisyr">17.46</td><td>17.15</td><td class="analysis-cell"><span class="improved">Improved</span>, stable strong intake.</td><td class="rank-weak">7th</td></tr>
+            <tr><td>Faculty–Student Ratio (FSR)</td><td>25</td><td class="rank-thisyr">24.41</td><td>21.66</td><td class="analysis-cell"><span class="improved">Improved</span> significantly, excellent alignment now.</td><td class="rank-top">3rd</td></tr>
+            <tr><td>Faculty Qualification (FQE)</td><td>20</td><td class="rank-thisyr">18.24</td><td>16.67</td><td class="analysis-cell"><span class="improved">Improved</span>, stronger faculty credentials.</td><td class="rank-top">2nd</td></tr>
+            <tr><td>Financial Resources (FRU)</td><td>20</td><td class="rank-thisyr">6.38</td><td>7.10</td><td class="analysis-cell"><span class="declined">Declined</span>, weaker utilization of funds.</td><td class="rank-weak">9th</td></tr>
+            <tr><td>OE + MIR</td><td>15</td><td class="rank-thisyr">5.13</td><td>6.25</td><td class="analysis-cell"><span class="declined">Declined</span>, MIR weaker than others.</td><td class="rank-weak">6th</td></tr>
           </tbody>
         </table>
       </div>
@@ -113,13 +91,13 @@
       <div class="metrics-table">
         <table>
           <thead>
-            <tr><th>Sub-metric</th><th>Max</th><th>2025</th><th>2024</th><th>Analysis</th></tr>
+            <tr><th>Sub-metric</th><th>Max</th><th>2025</th><th>2024</th><th>Analysis</th><th>JU’s Position in Top 10</th></tr>
           </thead>
           <tbody>
-            <tr><td>Publications (PU)</td><td>35</td><td>22.61</td><td>19.75</td><td class="analysis-cell"><span class="improved">Improved</span>, higher volume and quality.</td></tr>
-            <tr><td>Quality of Publications (QP)</td><td>35</td><td>22.86</td><td>20.07</td><td class="analysis-cell"><span class="improved">Improved</span>, stronger citation impact.</td></tr>
-            <tr><td>Patents/IPR</td><td>15</td><td>4.50</td><td>2.50</td><td class="analysis-cell"><span class="improved">Improved</span>, though still low.</td></tr>
-            <tr><td>FPPP</td><td>15</td><td>2.22</td><td>2.91</td><td class="analysis-cell"><span class="declined">Declined</span>, weaker project/consultancy outcomes.</td></tr>
+            <tr><td>Publications (PU)</td><td>35</td><td class="rank-thisyr">22.61</td><td>19.75</td><td class="analysis-cell"><span class="improved">Improved</span>, higher volume and quality.</td><td class="rank-weak">7th</td></tr>
+            <tr><td>Quality of Publications (QP)</td><td>35</td><td class="rank-thisyr">22.86</td><td>20.07</td><td class="analysis-cell"><span class="improved">Improved</span>, stronger citation impact.</td><td class="rank-top">4th</td></tr>
+            <tr><td>Patents/IPR</td><td>15</td><td class="rank-thisyr">4.50</td><td>2.50</td><td class="analysis-cell"><span class="improved">Improved</span>, though still low.</td><td class="rank-top">3rd</td></tr>
+            <tr><td>FPPP</td><td>15</td><td class="rank-thisyr">2.22</td><td>2.91</td><td class="analysis-cell"><span class="declined">Declined</span>, weaker project/consultancy outcomes.</td><td class="rank-weak">7th</td></tr>
           </tbody>
         </table>
       </div>
@@ -134,11 +112,11 @@
       <div class="metrics-table">
         <table>
           <thead>
-            <tr><th>Sub-metric</th><th>Max</th><th>2025</th><th>2024</th><th>Analysis</th></tr>
+            <tr><th>Sub-metric</th><th>Max</th><th>2025</th><th>2024</th><th>Analysis</th><th>JU’s Position in Top 10</th></tr>
           </thead>
           <tbody>
-            <tr><td>Graduate Employability (GUE)</td><td>60</td><td>57.67</td><td>60.00</td><td class="analysis-cell"><span class="declined">Declined</span>, slightly lower employability score.</td></tr>
-            <tr><td>PhD Graduations (GPHD)</td><td>40</td><td>30.14</td><td>29.92</td><td class="analysis-cell"><span class="improved">Improved</span> marginally in PhD completions.</td></tr>
+            <tr><td>Graduate Employability (GUE)</td><td>60</td><td class="rank-thisyr">57.67</td><td>60.00</td><td class="analysis-cell"><span class="declined">Declined</span>, slightly lower employability score.</td><td class="rank-top">4th</td></tr>
+            <tr><td>PhD Graduations (GPHD)</td><td>40</td><td class="rank-thisyr">30.14</td><td>29.92</td><td class="analysis-cell"><span class="improved">Improved</span> marginally in PhD completions.</td><td class="rank-good">6th</td></tr>
           </tbody>
         </table>
       </div>
@@ -153,13 +131,13 @@
       <div class="metrics-table">
         <table>
           <thead>
-            <tr><th>Sub-metric</th><th>Max</th><th>2025</th><th>2024</th><th>Analysis</th></tr>
+            <tr><th>Sub-metric</th><th>Max</th><th>2025</th><th>2024</th><th>Analysis</th><th>JU’s Position in Top 10</th></tr>
           </thead>
           <tbody>
-            <tr><td>Regional Diversity (RD)</td><td>30</td><td>2.63</td><td>1.20</td><td class="analysis-cell"><span class="improved">Improved</span>, though still very weak diversity.</td></tr>
-            <tr><td>Women Diversity (WD)</td><td>30</td><td>23.73</td><td>23.04</td><td class="analysis-cell"><span class="improved">Improved</span> slightly, strong female representation.</td></tr>
-            <tr><td>Economically Challenged (ESCS)</td><td>20</td><td>5.98</td><td>5.69</td><td class="analysis-cell"><span class="improved">Improved</span>, but still weak support to disadvantaged.</td></tr>
-            <tr><td>Physically Challenged (PCS)</td><td>20</td><td>20.00</td><td>20.00</td><td class="analysis-cell"><span class="stable">Stable</span>, continues perfect inclusion.</td></tr>
+            <tr><td>Regional Diversity (RD)</td><td>30</td><td class="rank-thisyr">2.63</td><td>1.20</td><td class="analysis-cell"><span class="improved">Improved</span>, though still very weak diversity.</td><td class="rank-weak">9th</td></tr>
+            <tr><td>Women Diversity (WD)</td><td>30</td><td class="rank-thisyr">23.73</td><td>23.04</td><td class="analysis-cell"><span class="improved">Improved</span> slightly, strong female representation.</td><td class="rank-good">5th</td></tr>
+            <tr><td>Economically Challenged (ESCS)</td><td>20</td><td class="rank-thisyr">5.98</td><td>5.69</td><td class="analysis-cell"><span class="improved">Improved</span>, but still weak support to disadvantaged.</td><td class="rank-top">4th</td></tr>
+            <tr><td>Physically Challenged (PCS)</td><td>20</td><td class="rank-thisyr">20.00</td><td>20.00</td><td class="analysis-cell"><span class="stable">Stable</span>, continues perfect inclusion.</td><td class="rank-top">1st</td></tr>
           </tbody>
         </table>
       </div>
@@ -174,10 +152,10 @@
       <div class="metrics-table">
         <table>
           <thead>
-            <tr><th>Sub-metric</th><th>Max</th><th>2025</th><th>2024</th><th>Analysis</th></tr>
+            <tr><th>Sub-metric</th><th>Max</th><th>2025</th><th>2024</th><th>Analysis</th><th>JU’s Position in Top 10</th></tr>
           </thead>
           <tbody>
-            <tr><td>PR + Accreditation</td><td>100</td><td>54.87</td><td>63.74</td><td class="analysis-cell"><span class="declined">Declined</span>, perception fell compared to 2024.</td></tr>
+            <tr><td>PR + Accreditation</td><td>100</td><td class="rank-thisyr">54.87</td><td>63.74</td><td class="analysis-cell"><span class="declined">Declined</span>, perception fell compared to 2024.</td><td class="rank-top">2nd</td></tr>
           </tbody>
         </table>
       </div>
