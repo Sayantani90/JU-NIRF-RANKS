@@ -1,39 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jadavpur University — NIRF 2025 Detailed Metrics Analysis</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); color: #2c3e50; min-height: 100vh; }
-    .header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 2rem 0; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-    .header h1 { font-size: 2.5rem; font-weight: 300; margin-bottom: 0.5rem; }
-    .header p { font-size: 1.1rem; opacity: 0.9; }
-    .container { max-width: 1400px; margin: 0 auto; padding: 2rem 1rem; }
-    .overall-score { background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white; padding: 2rem; border-radius: 15px; text-align: center; margin-bottom: 2rem; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
-    .overall-score h2 { font-size: 3rem; margin-bottom: 0.5rem; font-weight: 700; }
-    .overall-score p { font-size: 1.2rem; opacity: 0.9; }
-    .overall-rank { font-size: 1.5rem; margin-top: 0.5rem; font-weight: 700; color: #27ae60; }
-	.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-    .stat-card { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); text-align: center; border-left: 5px solid; }
-    .stat-card.excellent { border-left-color: #2ecc71; }
-    .stat-card.good { border-left-color: #3498db; }
-    .stat-card.average { border-left-color: #f39c12; }
-    .stat-card.weak { border-left-color: #e74c3c; }
-    .stat-card h4 { font-size: 1rem; margin-bottom: 1rem; font-weight: 600; }
-    .stat-card .score { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .metrics-section { margin-bottom: 3rem; }
-    .section-title { background: white; padding: 1.5rem 2rem; border-radius: 15px 15px 0 0; box-shadow: 0 4px 20px rgba(0,0,0,0.1); border-left: 5px solid #3498db; }
-    .section-title h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
-    .section-title .total-score { font-size: 2rem; font-weight: 700; color: #3498db; }
-    .metrics-table { background: white; border-radius: 0 0 15px 15px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
-    table { width: 100%; border-collapse: collapse; }
-    th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #ecf0f1; }
-    th { background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%); color: white; font-weight: 600; text-transform: uppercase; font-size: 0.85rem; }
-    tbody tr:hover { background-color: #f8f9fa; }
-    .analysis-cell { max-width: 350px; font-size: 0.9rem; line-height: 1.4; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadavpur University - Academic Ranking Analysis</title>
+	 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .executive-summary {
+            background: #e8f4fd;
+            border-left: 4px solid #2980b9;
+            margin: 30px;
+            padding: 25px;
+            border-radius: 6px;
+        }
+
+        .executive-summary h2 {
+            color: #2980b9;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 6px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e0e0e0;
+        }
+
+        .stat-card .metric {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .stat-card .value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2980b9;
+        }
+
+        .stat-card .change {
+            font-size: 0.9rem;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        .positive { color: #27ae60; }
+        .negative { color: #e74c3c; }
+        .neutral { color: #7f8c8d; }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+            font-weight: 600;
+        }
+
+        .subsection-title {
+            font-size: 1.3rem;
+            color: #34495e;
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 12px 10px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            border-right: 1px solid #eee;
+        }
+
+        th {
+            background-color: #34495e;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ju-row {
+            background-color: #fff3cd !important;
+            border: 2px solid #ffc107;
+            font-weight: 600;
+        }
+
+        .ju-row td {
+            color: #856404;
+            font-weight: 600;
+        }
+
+        .rank-highlight {
+            
+            color: #856404;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .rank-1 { color: #d4af37; font-weight: bold; }
+        .rank-2 { color: #c0c0c0; font-weight: bold; }
+        .rank-3 { color: #cd7f32; font-weight: bold; }
+        .top-5 { color: #27ae60; font-weight: 600; }
+        .top-10 { color: #3498db; font-weight: 500; }
+
+        .metric-analysis {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .metric-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .metric-card h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid #f8f9fa;
+        }
+
+        .metric-row:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            font-weight: 500;
+            color: #5d6d7e;
+            flex: 1;
+        }
+
+        .metric-value {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-left: 10px;
+        }
+
+        .performance-indicator {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .excellent { background: #d5f4e6; color: #27ae60; }
+        .good { background: #cce5ff; color: #3498db; }
+        .average { background: #fff3cd; color: #f39c12; }
+        .poor { background: #f8d7da; color: #e74c3c; }
+
+        .key-insights {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .key-insights h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .insight-item {
+            background: white;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #3498db;
+        }
+
+        .insight-item h4 {
+            color: #2980b9;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .insight-item p {
+            color: #5d6d7e;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .footnote {
+            background: #ecf0f1;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            border-left: 4px solid #95a5a6;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8rem; }
+            .summary-stats { grid-template-columns: 1fr; }
+            .metric-analysis { grid-template-columns: 1fr; }
+            .insights-grid { grid-template-columns: 1fr; }
+            table { font-size: 0.85rem; }
+            th, td { padding: 8px 6px; }
+        }
+		.analysis-cell { max-width: 350px; font-size: 0.9rem; line-height: 1.4; }
     .improved { color: #27ae60; font-weight: 600; }
     .declined { color: brown; font-weight: 600; }
     .stable { color: #7f8c8d; font-weight: 600; }
@@ -44,168 +323,587 @@
 	.rank-up { color: #27ae60; font-weight: 700; }
 	.rank-down { color: #e74c3c; font-weight: 700; }
 	.rank-same { color: #f39c12; font-weight: 700; }
-    .charts-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 2rem; margin-top: 2rem; }
+	.charts-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 2rem; margin-top: 2rem; }
     .chart-container { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
     .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
     .chart-header h3 { color: #2c3e50; font-size: 1.2rem; font-weight: 600; }
-  </style>
+    </style>
 </head>
 <body>
-  <div class="header">
-    <h1>Jadavpur University</h1>
-    <p>NIRF 2025 — Detailed Metrics Analysis Dashboard</p>
-  </div>
-
     <div class="container">
-    <div class="overall-score">
-      <h2>65.42</h2>
-      <p>Overall NIRF Score 2025 — Performance compared with 2024 (65.39) & Top 10 Universities</p>
-      <div class="overall-rank">JU’s Overall Position: <span class="rank-weak">9th</span> in Top Universities</div>
-    </div>
+        <div class="header">
+            <h1>Jadavpur University</h1>
+            <div class="subtitle">NIRF Academic Ranking Analysis Report 2024-2025</div>
+        </div>
 
-    <!-- TLR Section -->
-    <div class="metrics-section">
-      <div class="section-title">
-        <h3>📚 Teaching, Learning & Resources (TLR)</h3>
-        <div class="total-score">71.62 / 100</div>
-      </div>
-      <div class="metrics-table">
-        <table>
-          <thead>
-            <tr><th>Sub-metric</th><th>Max</th><th>2025</th><th>2024</th><th>Analysis (based on score)</th><th>JU’s Current Position in Top 10 (2024)</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Student Strength (SS)</td><td>20</td><td class="rank-thisyr">17.46</td><td>17.15</td><td class="analysis-cell"><span class="improved">Improved</span>, stable intake.</td><td><span class="rank-up">6↑</span> (7)</td></tr>
-            <tr><td>Faculty–Student Ratio (FSR)</td><td>25</td><td class="rank-thisyr">24.41</td><td>21.66</td><td class="analysis-cell"><span class="improved">Improved</span> significantly good.</td><td><span class="rank-up">6↑</span> (7)</td></tr>
-            <tr><td>Faculty Qualification (FQE)</td><td>20</td><td class="rank-thisyr">18.24</td><td>16.67</td><td class="analysis-cell"><span class="improved">Improved</span>, stronger faculty credentials.</td><td><span class="rank-up">2↑</span> (6)</td></tr>
-            <tr><td>Financial Resources (FRU)</td><td>20</td><td class="rank-thisyr">6.38</td><td>7.10</td><td class="analysis-cell"><span class="declined">Declined</span>, weaker utilization of funds.</td><td><span class="rank-down">10↓</span> (9)</td></tr>
-            <tr><td>OE + MIR</td><td>15</td><td class="rank-thisyr">5.13</td><td>6.25</td><td class="analysis-cell"><span class="declined">Declined</span>, MIR weaker than others.</td><td><span class="rank-down">6↓</span> (3)</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+        <div class="executive-summary">
+            <h2>Executive Summary</h2>
+            <p>Jadavpur University maintains its consistent position at <strong>Rank #9</strong> in the National Institutional Ranking Framework (NIRF) for both 2024 and 2025, demonstrating stability in academic performance across key evaluation parameters.</p>
+            
+            <div class="summary-stats">
+                <div class="stat-card">
+                    <div class="metric">Overall Rank</div>
+                    <div class="value">9</div>
+                    <div class="change neutral">Maintained</div>
+                </div>
+                <div class="stat-card">
+                    <div class="metric">Total Score</div>
+                    <div class="value">65.43</div>
+                    <div class="change positive">+0.018</div>
+                </div>
+                <div class="stat-card">
+                    <div class="metric">Best Metric Rank</div>
+                    <div class="value">3</div>
+                    <div class="change neutral">PR (Perception)</div>
+                </div>
+                
+            </div>
+        </div>
 
-    <!-- RPC Section -->
-    <div class="metrics-section">
-      <div class="section-title">
-        <h3>🔬 Research & Professional Practice (RPC)</h3>
-        <div class="total-score">52.19 / 100</div>
-      </div>
-      <div class="metrics-table">
-        <table>
-          <thead>
-            <tr><th>Sub-metric</th><th>Max</th><th>2025</th><th>2024</th><th>Analysis (based on score)</th><th>JU’s Current Position in Top 10 (2024)</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Publications (PU)</td><td>35</td><td class="rank-thisyr">22.61</td><td>19.75</td><td class="analysis-cell"><span class="improved">Improved</span>, higher volume and quality.</td><td><span class="rank-down">5↓</span> (3)</td></tr>
-            <tr><td>Quality of Publications (QP)</td><td>35</td><td class="rank-thisyr">22.86</td><td>20.07</td><td class="analysis-cell"><span class="improved">Improved</span>, stronger citation impact.</td><td><span class="rank-same">8↔</span> (8)</td></tr>
-            <tr><td>Patents/IPR</td><td>15</td><td class="rank-thisyr">4.50</td><td>2.50</td><td class="analysis-cell"><span class="improved">Improved</span>, though still low.</td><td><span class="rank-same">5↔</span> (5)</td></tr>
-            <tr><td>FPPP</td><td>15</td><td class="rank-thisyr">2.22</td><td>2.91</td><td class="analysis-cell"><span class="declined">Declined</span>, weaker project/consultancy outcomes.</td><td><span class="rank-same">7↔</span> (7)</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+        <div class="content">
+            <section class="section">
+                <h2 class="section-title">1. Overall Ranking Performance</h2>
+                
+                <h3 class="subsection-title">Metric-wise Rankings in Top 10</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Year</th>
+                                <th>TLR Rank</th>
+                                <th>RPC Rank</th>
+                                <th>GO Rank</th>
+                                <th>OI Rank</th>
+                                <th>PR Rank</th>
+                                <th>Overall Rank</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="ju-row">
+                                <td>2025</td>
+                                <td><span class="rank-highlight">8</span></td>
+                                <td><span class="rank-highlight">5</span></td>
+                                <td><span class="rank-highlight">6</span></td>
+                                <td><span class="rank-highlight">10</span></td>
+                                <td><span class="rank-highlight">3</span></td>
+                                <td><span class="rank-highlight">9</span></td>
+                            </tr>
+                            <tr class="ju-row">
+                                <td>2024</td>
+                                <td><span class="rank-highlight">8</span></td>
+                                <td><span class="rank-highlight">6</span></td>
+                                <td><span class="rank-highlight">6</span></td>
+                                <td><span class="rank-highlight">10</span></td>
+                                <td><span class="rank-highlight">3</span></td>
+                                <td><span class="rank-highlight">9</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-    <!-- GO Section -->
-    <div class="metrics-section">
-      <div class="section-title">
-        <h3>🎓 Graduation Outcomes (GO)</h3>
-        <div class="total-score">87.81 / 100</div>
-      </div>
-      <div class="metrics-table">
-        <table>
-          <thead>
-            <tr><th>Sub-metric</th><th>Max</th><th>2025</th><th>2024</th><th>Analysis (based on score)</th><th>JU’s Current Position in Top 10 (2024)</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Graduate Employability (GUE)</td><td>60</td><td class="rank-thisyr">57.67</td><td>60.00</td><td class="analysis-cell"><span class="declined">Declined</span>, slightly lower employability score.</td><td><span class="rank-down">9↓</span> (1)</td></tr>
-            <tr><td>PhD Graduations (GPHD)</td><td>40</td><td class="rank-thisyr">30.14</td><td>29.92</td><td class="analysis-cell"><span class="improved">Improved</span> marginally in PhD completions.</td><td><span class="rank-same">6↔</span> (6)</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+                <h3 class="subsection-title">Comparative Performance - 2025 Rankings</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Institute</th>
+                                <th>TLR</th>
+                                <th>RPC</th>
+                                <th>GO</th>
+                                <th>OI</th>
+                                <th>PR</th>
+                                <th>Total Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="rank-1">1</td>
+                                <td>IISc</td>
+                                <td>86.47</td>
+                                <td>88.15</td>
+                                <td>83.69</td>
+                                <td>60.29</td>
+                                <td>98.89</td>
+                                <td>85.042</td>
+                            </tr>
+                            <tr>
+                                <td class="rank-2">2</td>
+                                <td>JNU</td>
+                                <td>75.52</td>
+                                <td>45.58</td>
+                                <td>99.93</td>
+                                <td>78.82</td>
+                                <td>67.89</td>
+                                <td>70.987</td>
+                            </tr>
+                            <tr>
+                                <td class="rank-3">3</td>
+                                <td>Manipal AHE</td>
+                                <td>79.44</td>
+                                <td>61.75</td>
+                                <td>78.52</td>
+                                <td>67.71</td>
+                                <td>44.19</td>
+                                <td>69.251</td>
+                            </tr>
+                            <tr>
+                                <td class="top-5">4</td>
+                                <td>Jamia MI</td>
+                                <td>73.81</td>
+                                <td>50.03</td>
+                                <td>92.56</td>
+                                <td>83.83</td>
+                                <td>50.63</td>
+                                <td>69.11</td>
+                            </tr>
+                            <tr>
+                                <td class="top-5">5</td>
+                                <td>DU</td>
+                                <td>60.65</td>
+                                <td>58.52</td>
+                                <td>96.94</td>
+                                <td>70.16</td>
+                                <td>52.38</td>
+                                <td>67.393</td>
+                            </tr>
+                            <tr>
+                                <td class="top-10">6</td>
+                                <td>BHU</td>
+                                <td>76.42</td>
+                                <td>51.18</td>
+                                <td>95.42</td>
+                                <td>65.96</td>
+                                <td>33.34</td>
+                                <td>67.294</td>
+                            </tr>
+                            <tr>
+                                <td class="top-10">7</td>
+                                <td>BITS Pilani</td>
+                                <td>72.16</td>
+                                <td>63.27</td>
+                                <td>77.74</td>
+                                <td>61.42</td>
+                                <td>49.19</td>
+                                <td>67.238</td>
+                            </tr>
+                            <tr>
+                                <td class="top-10">8</td>
+                                <td>Amrita VV</td>
+                                <td>76.86</td>
+                                <td>51.06</td>
+                                <td>81.91</td>
+                                <td>71.42</td>
+                                <td>51.47</td>
+                                <td>67.047</td>
+                            </tr>
+                            <tr class="ju-row">
+                                <td>9</td>
+                                <td><strong>Jadavpur University</strong></td>
+                                <td>71.62</td>
+                                <td>52.19</td>
+                                <td>87.81</td>
+                                <td>52.34</td>
+                                <td>54.87</td>
+                                <td>65.426</td>
+                            </tr>
+                            <tr>
+                                <td class="top-10">10</td>
+                                <td>Aligarh MU</td>
+                                <td>71.5</td>
+                                <td>48.04</td>
+                                <td>93.79</td>
+                                <td>64.58</td>
+                                <td>42.74</td>
+                                <td>65.352</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
 
-    <!-- OI Section -->
-    <div class="metrics-section">
-      <div class="section-title">
-        <h3>🌐 Outreach & Inclusivity (OI)</h3>
-        <div class="total-score">52.34 / 100</div>
-      </div>
-      <div class="metrics-table">
-        <table>
-          <thead>
-            <tr><th>Sub-metric</th><th>Max</th><th>2025</th><th>2024</th><th>Analysis (based on score)</th><th>JU’s Current Position in Top 10 (2024)</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Regional Diversity (RD)</td><td>30</td><td class="rank-thisyr">2.63</td><td>1.20</td><td class="analysis-cell"><span class="improved">Improved</span>, though still very weak diversity.</td><td><span class="rank-same">10↔</span> (10)</td></tr>
-            <tr><td>Women Diversity (WD)</td><td>30</td><td class="rank-thisyr">23.73</td><td>23.04</td><td class="analysis-cell"><span class="improved">Improved</span> slightly, strong female representation.</td><td><span class="rank-up">8↑</span> (9)</td></tr>
-            <tr><td>Economically Challenged (ESCS)</td><td>20</td><td class="rank-thisyr">5.98</td><td>5.69</td><td class="analysis-cell"><span class="improved">Improved</span>, but still weak support to disadvantaged.</td><td><span class="rank-down">4↓</span> (2)</td></tr>
-            <tr><td>Physically Challenged (PCS)</td><td>20</td><td class="rank-thisyr">20.00</td><td>20.00</td><td class="analysis-cell"><span class="stable">Stable</span>, continues perfect inclusion.</td><td><span class="rank-same">1↔</span> (1)</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+            <section class="section">
+                <h2 class="section-title">2. Detailed Metric Analysis</h2>
+                
+                <div class="metric-analysis">
+                    <div class="metric-card">
+                        <h4>Teaching, Learning & Resources (TLR)</h4>
+                        <div class="metric-row">
+                            <span class="metric-label">2024 Score</span>
+                            <span class="metric-value">68.83</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">2025 Score</span>
+                            <span class="metric-value">71.62 <span class="performance-indicator good">+2.79</span></span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Rank</span>
+                            <span class="metric-value">8th <span class="performance-indicator good">Maintained</span></span>
+                        </div>
+                    </div>
 
-    <!-- PR Section -->
-    <div class="metrics-section">
-      <div class="section-title">
-        <h3>💡 Perception (PR)</h3>
-        <div class="total-score">54.87 / 100</div>
-      </div>
-      <div class="metrics-table">
-        <table>
-          <thead>
-            <tr><th>Sub-metric</th><th>Max</th><th>2025</th><th>2024</th><th>Analysis (based on score)</th><th>JU’s Current Position in Top 10 (2024)</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>PR + Accreditation</td><td>100</td><td class="rank-thisyr">54.87</td><td>63.74</td><td class="analysis-cell"><span class="declined">Declined</span>, perception fell compared to 2024.</td><td><span class="rank-same">3↔</span> (3)</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+                    <div class="metric-card">
+                        <h4>Research & Professional Practice (RPC)</h4>
+                        <div class="metric-row">
+                            <span class="metric-label">2024 Score</span>
+                            <span class="metric-value">51.36</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">2025 Score</span>
+                            <span class="metric-value">52.19 <span class="performance-indicator good">+0.83</span></span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Rank</span>
+                            <span class="metric-value">5th <span class="performance-indicator excellent">↑1</span></span>
+                        </div>
+                    </div>
 
-  </div>
-    <!-- Charts Section -->
-    <div class="charts-container">
-      <div class="chart-container">
-        <div class="chart-header"><h3>📊 Category Performance Comparison</h3></div>
-        <canvas id="categoryChart"></canvas>
-      </div>
-      <div class="chart-container">
-        <div class="chart-header"><h3>🎯 Sub-metrics Performance Comparison</h3></div>
-        <canvas id="submetricsChart"></canvas>
-      </div>
-    </div>
-  </div>
+                    <div class="metric-card">
+                        <h4>Graduation Outcomes (GO)</h4>
+                        <div class="metric-row">
+                            <span class="metric-label">2024 Score</span>
+                            <span class="metric-value">89.92</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">2025 Score</span>
+                            <span class="metric-value">87.81 <span class="performance-indicator average">-2.11</span></span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Rank</span>
+                            <span class="metric-value">6th <span class="performance-indicator good">Maintained</span></span>
+                        </div>
+                    </div>
 
-<script>
-    // Radar Chart for Categories
-    const categoryCtx = document.getElementById('categoryChart').getContext('2d');
-    new Chart(categoryCtx, {
-      type: 'radar',
-      data: {
-        labels: ['TLR', 'RPC', 'GO', 'OI', 'PR'],
-        datasets: [
-          { label: '2025', data: [71.62, 52.19, 87.81, 52.34, 54.87], backgroundColor: 'rgba(46, 204, 113, 0.2)', borderColor: '#27ae60', borderWidth: 2 },
-          { label: '2024', data: [68.83, 51.36, 89.92, 49.93, 63.74], backgroundColor: 'rgba(52, 152, 219, 0.2)', borderColor: '#2980b9', borderWidth: 2 }
-        ]
-      },
-      options: { responsive: true, scales: { r: { suggestedMin: 0, suggestedMax: 100 } } }
-    });
+                    <div class="metric-card">
+                        <h4>Outreach & Inclusivity (OI)</h4>
+                        <div class="metric-row">
+                            <span class="metric-label">2024 Score</span>
+                            <span class="metric-value">49.93</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">2025 Score</span>
+                            <span class="metric-value">52.34 <span class="performance-indicator good">+2.41</span></span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Rank</span>
+                            <span class="metric-value">10th <span class="performance-indicator good">Maintained</span></span>
+                        </div>
+                    </div>
 
-    // Bar Chart for Sub-metrics
-    const submetricsCtx = document.getElementById('submetricsChart').getContext('2d');
-    new Chart(submetricsCtx, {
-      type: 'bar',
-      data: {
-        labels: ['SS', 'FSR', 'FQE', 'FRU', 'OE+MIR', 'PU', 'QP', 'IPR', 'FPPP', 'GUE', 'GPHD', 'RD', 'WD', 'ESCS', 'PCS', 'PR'],
-        datasets: [
-          { label: '2025', data: [17.46, 24.41, 18.24, 6.38, 5.13, 22.61, 22.86, 4.5, 2.22, 57.67, 30.14, 2.63, 23.73, 5.98, 20, 54.87], backgroundColor: '#27ae60' },
-          { label: '2024', data: [17.15, 21.66, 16.67, 7.1, 6.25, 19.75, 20.07, 2.5, 2.91, 60, 29.92, 1.2, 23.04, 5.69, 20, 63.74], backgroundColor: '#2980b9' }
-        ]
-      },
-      options: { responsive: true, indexAxis: 'y', scales: { x: { beginAtZero: true, max: 100 } } }
-    });
+                    <div class="metric-card">
+                        <h4>Perception (PR)</h4>
+                        <div class="metric-row">
+                            <span class="metric-label">2024 Score</span>
+                            <span class="metric-value">63.74</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">2025 Score</span>
+                            <span class="metric-value">54.87 <span class="performance-indicator poor">-8.87</span></span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Rank</span>
+                            <span class="metric-value">3rd <span class="performance-indicator excellent">Maintained</span></span>
+                        </div>
+                    </div>
+
+                    <div class="metric-card" style="border-left: 4px solid #f39c12;">
+                        <h4>Overall Performance</h4>
+                        <div class="metric-row">
+                            <span class="metric-label">2024 Total</span>
+                            <span class="metric-value">65.408</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">2025 Total</span>
+                            <span class="metric-value">65.426 <span class="performance-indicator good">+0.018</span></span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Overall Rank</span>
+                            <span class="metric-value">9th <span class="performance-indicator good">Stable</span></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">3. Component-wise Breakdown (2025)</h2>
+
+                <h3 class="subsection-title">TLR Components</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+								<th>Sub-metric</th>
+								<th>Max</th>
+								<th>2025</th>
+								<th>2024</th>
+								<th>Analysis (based on score)</th>
+								<th>JU’s Current Position in Top 10 (2024)</th>
+							</tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Student Strength (SS)</td>
+								<td>20</td>
+								<td class="rank-thisyr">17.46</td>
+								<td>17.15</td>
+								<td class="analysis-cell"><span class="improved">Improved</span>, stable intake.</td>
+								<td><span class="rank-up">6↑</span> (7)</td>
+								
+                            </tr>
+                            <tr>
+                                <td>Faculty–Student Ratio (FSR)</td>
+								<td>25</td>
+								<td class="rank-thisyr">24.41</td>
+								<td>21.66</td>
+								<td class="analysis-cell"><span class="improved">Improved</span> significantly good.</td>
+								<td><span class="rank-up">6↑</span> (7)</td>
+								
+                            </tr>
+                            <tr>
+                                <td>Faculty Qualification (FQE)</td>
+								<td>20</td>
+								<td class="rank-thisyr">18.24</td>
+								<td>16.67</td>
+								<td class="analysis-cell"><span class="improved">Improved</span>, stronger faculty credentials.</td>
+								<td><span class="rank-up">2↑</span> (6)</td>
+								
+                            </tr>
+                            <tr>
+                                <td>Financial Resources (FRU)</td>
+								<td>20</td>
+								<td class="rank-thisyr">6.38</td>
+								<td>7.10</td><td class="analysis-cell"><span class="declined">Declined</span>, weaker utilization of funds.</td>
+								<td><span class="rank-down">10↓</span> (9)</td>
+
+                            </tr>
+                            <tr>
+                                <td>OE + MIR</td>
+								<td>15</td>
+								<td class="rank-thisyr">5.13</td>
+								<td>6.25</td>
+								<td class="analysis-cell"><span class="declined">Declined</span>, MIR weaker than others.</td>
+								<td><span class="rank-down">6↓</span> (3)</td>
+								
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="subsection-title">RPC Components</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sub-metric</th>
+								<th>Max</th>
+								<th>2025</th>
+								<th>2024</th>
+								<th>Analysis (based on score)</th>
+								<th>JU’s Current Position in Top 10 (2024)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Publications (PU)</td>
+								<td>35</td>
+								<td class="rank-thisyr">22.61</td>
+								<td>19.75</td>
+								<td class="analysis-cell"><span class="improved">Improved</span>, higher volume and quality.</td>
+								<td><span class="rank-down">5↓</span> (3)</td>
+								
+                            </tr>
+                            <tr>
+                                <td>Quality of Publications (QP)</td>
+								<td>35</td>
+								<td class="rank-thisyr">22.86</td>
+								<td>20.07</td>
+								<td class="analysis-cell"><span class="improved">Improved</span>, stronger citation impact.</td>
+								<td><span class="rank-same">8↔</span> (8)</td>
+								
+                            </tr>
+                            <tr>
+                                <td>Patents/IPR</td>
+								<td>15</td>
+								<td class="rank-thisyr">4.50</td>
+								<td>2.50</td>
+								<td class="analysis-cell"><span class="improved">Improved</span>, though still low.</td>
+								<td><span class="rank-same">5↔</span> (5)</td>
+								
+                            </tr>
+                            <tr>
+                                <td>FPPP</td>
+								<td>15</td>
+								<td class="rank-thisyr">2.22</td>
+								<td>2.91</td>
+								<td class="analysis-cell"><span class="declined">Declined</span>, weaker project/consultancy outcomes.</td>
+								<td><span class="rank-same">7↔</span> (7)</td>
+								
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="subsection-title">GO Components</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sub-metric</th>
+								<th>Max</th>
+								<th>2025</th>
+								<th>2024</th>
+								<th>Analysis (based on score)</th>
+								<th>JU’s Current Position in Top 10 (2024)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Graduate Employability (GUE)</td>
+								<td>60</td>
+								<td class="rank-thisyr">57.67</td>
+								<td>60.00</td>
+								<td class="analysis-cell"><span class="declined">Declined</span>, slightly lower employability score.</td>
+								<td><span class="rank-down">9↓</span> (1)</td>
+								
+                            </tr>
+                            <tr>
+                                <td>PhD Graduations (GPHD)</td>
+								<td>40</td>
+								<td class="rank-thisyr">30.14</td>
+								<td>29.92</td>
+								<td class="analysis-cell"><span class="improved">Improved</span> marginally in PhD completions.</td>
+								<td><span class="rank-same">6↔</span> (6)</td>
+								
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="subsection-title">OI Components</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sub-metric</th>
+								<th>Max</th>
+								<th>2025</th>
+								<th>2024</th>
+								<th>Analysis (based on score)</th>
+								<th>JU’s Current Position in Top 10 (2024)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Regional Diversity (RD)</td>
+								<td>30</td>
+								<td class="rank-thisyr">2.63</td>
+								<td>1.20</td>
+								<td class="analysis-cell"><span class="improved">Improved</span>, though still very weak diversity.</td>
+								<td><span class="rank-same">10↔</span> (10)</td>
+								
+                            </tr>
+                            <tr>
+                                <td>Women Diversity (WD)</td>
+								<td>30</td>
+								<td class="rank-thisyr">23.73</td>
+								<td>23.04</td>
+								<td class="analysis-cell"><span class="improved">Improved</span> slightly, strong female representation.</td>
+								<td><span class="rank-up">8↑</span> (9)</td>
+								
+                            </tr>
+                            <tr>
+                                <td>Economically Challenged (ESCS)</td>
+								<td>20</td>
+								<td class="rank-thisyr">5.98</td>
+								<td>5.69</td>
+								<td class="analysis-cell"><span class="improved">Improved</span>, but still weak support to disadvantaged.</td>
+								<td><span class="rank-down">4↓</span> (2)</td>
+							</tr>
+							
+							<tr>
+								<td>Physically Challenged (PCS)</td>
+								<td>20</td>
+								<td class="rank-thisyr">20.00</td>
+								<td>20.00</td>
+								<td class="analysis-cell"><span class="stable">Stable</span>, continues perfect inclusion.</td>
+								<td><span class="rank-same">1↔</span> (1)</td>
+							</tr>
+							</tbody>
+                    </table>
+                </div>
+				
+				<h3 class="subsection-title">PR Components</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sub-metric</th>
+								<th>Max</th>
+								<th>2025</th>
+								<th>2024</th>
+								<th>Analysis (based on score)</th>
+								<th>JU’s Current Position in Top 10 (2024)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+								<td>PR + Accreditation</td>
+								<td>100</td>
+								<td class="rank-thisyr">54.87</td>
+								<td>63.74</td>
+								<td class="analysis-cell"><span class="declined">Declined</span>, perception fell compared to 2024.</td>
+								<td><span class="rank-same">3↔</span> (3)</td>
+ 
+                            </tr>
+
+							</tbody>
+                    </table>
+                </div>
+				
+				
+		</div>		
+		
+		<div class="charts-container">
+		  <div class="chart-container">
+			<div class="chart-header"><h3>📊 Category Performance Comparison</h3></div>
+			<canvas id="categoryChart"></canvas>
+		  </div>
+		  <div class="chart-container">
+			<div class="chart-header"><h3>🎯 Sub-metrics Performance Comparison</h3></div>
+			<canvas id="submetricsChart"></canvas>
+		  </div>
+		</div>
+	</div>	
+	
+		<script>
+		// Radar Chart for Categories
+		const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+		new Chart(categoryCtx, {
+		  type: 'radar',
+		  data: {
+			labels: ['TLR', 'RPC', 'GO', 'OI', 'PR'],
+			datasets: [
+			  { label: '2025', data: [71.62, 52.19, 87.81, 52.34, 54.87], backgroundColor: 'rgba(46, 204, 113, 0.2)', borderColor: '#27ae60', borderWidth: 2 },
+			  { label: '2024', data: [68.83, 51.36, 89.92, 49.93, 63.74], backgroundColor: 'rgba(52, 152, 219, 0.2)', borderColor: '#2980b9', borderWidth: 2 }
+			]
+		  },
+		  options: { responsive: true, scales: { r: { suggestedMin: 0, suggestedMax: 100 } } }
+		});
+
+		// Bar Chart for Sub-metrics
+		const submetricsCtx = document.getElementById('submetricsChart').getContext('2d');
+		new Chart(submetricsCtx, {
+		  type: 'bar',
+		  data: {
+			labels: ['SS', 'FSR', 'FQE', 'FRU', 'OE+MIR', 'PU', 'QP', 'IPR', 'FPPP', 'GUE', 'GPHD', 'RD', 'WD', 'ESCS', 'PCS', 'PR'],
+			datasets: [
+			  { label: '2025', data: [17.46, 24.41, 18.24, 6.38, 5.13, 22.61, 22.86, 4.5, 2.22, 57.67, 30.14, 2.63, 23.73, 5.98, 20, 54.87], backgroundColor: '#27ae60' },
+			  { label: '2024', data: [17.15, 21.66, 16.67, 7.1, 6.25, 19.75, 20.07, 2.5, 2.91, 60, 29.92, 1.2, 23.04, 5.69, 20, 63.74], backgroundColor: '#2980b9' }
+			]
+		  },
+		  options: { responsive: true, indexAxis: 'y', scales: { x: { beginAtZero: true, max: 100 } } }
+		});
   </script>
-</body>
+  
+  </body>
 </html>
