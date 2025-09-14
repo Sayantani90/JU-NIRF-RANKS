@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIRF 2025 State Public University Rankings</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header { 
+			background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); 
+			color: white; 
+			padding: 2rem 0; 
+			text-align: center; 
+			box-shadow: 0 4px 20px rgba(0,0,0,0.1); 
+		}
+		.header h1 { 
+			font-size: 2.5rem; 
+			font-weight: 300; 
+			margin-bottom: 0.5rem; 
+		}
+		.header p { 
+			font-size: 1.1rem; 
+			opacity: 0.9; 
+		}
+
+        .content {
+            padding: 40px;
+        }
+
+        .table-section {
+            margin-bottom: 60px;
+        }
+
+        .table-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #4a5568;
+            position: relative;
+        }
+
+        .table-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            color: white;
+            padding: 15px 12px;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        tr:hover td {
+            background-color: #f7fafc;
+            transform: scale(1.01);
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f8fafc;
+        }
+
+        .rank-1 td:first-child {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #744210;
+            font-weight: bold;
+        }
+
+        .rank-2 td:first-child {
+            background: linear-gradient(135deg, #c0c0c0, #e2e8f0);
+            color: #4a5568;
+            font-weight: bold;
+        }
+
+        .rank-3 td:first-child {
+            background: linear-gradient(135deg, #cd7f32, #d69e2e);
+            color: white;
+            font-weight: bold;
+        }
+
+        .institute-name {
+            text-align: left !important;
+            font-weight: 600;
+            color: #2d3748;
+            max-width: 250px;
+        }
+		
+        .ju-row {
+            background-color: #fff3cd !important;
+            border: 2px solid #ffc107;
+            font-weight: 600;
+        }
+
+        .ju-row td {
+            color: #856404;
+            font-weight: 600;
+        }
+		
+        .higher-rank {
+            background-color: #E0F2D3 !important;
+            border: 1px solid #C7B3AF;
+            font-weight: 500;
+        }
+
+        .higher-rank td {
+            color: #731302;
+            font-weight: 600;
+        }
+        
+        .score {
+            font-weight: 600;
+            color: #2b6cb0;
+        }
+
+        .max-score {
+            color: #059669;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f7fafc;
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            table {
+                font-size: 0.8rem;
+            }
+            
+            th, td {
+                padding: 8px 6px;
+            }
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            background: #f7fafc;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+			<h1>NIRF 2025 State Public University Rankings</h1>
+			<p>Top 10 Universities - Detailed Metrics Analysis</p>
+		</div>
+
+        <div class="content">
+            <!-- Overall Rankings Table -->
+            <div class="table-section">
+                <h2 class="table-title">State Public University Rankings - Overall Scores</h2>
+                <div class="legend">
+                    <div class="legend-item">
+                        <span>TLR: Teaching, Learning & Resources (100)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span>RPC: Research and Professional Practice (100)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span>GO: Graduation Outcomes (100)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span>OI: Outreach and Inclusivity (100)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span>PR: Perception (100)</span>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>University</th>
+                                <th>TLR<br>(100)</th>
+                                <th>RPC<br>(100)</th>
+                                <th>GO<br>(100)</th>
+                                <th>OI<br>(100)</th>
+                                <th>PR<br>(100)</th>
+                                <th>Total Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="rank-1 ju-row">
+                                <td class="score">1</td>
+                                <td class="institute-name">Jadavpur University</td>
+                                <td class="score">77.17</td>
+                                <td class="score">70.1</td>
+                                <td class="score">92.99</td>
+                                <td class="score">53.77</td>
+                                <td class="score">79.22</td>
+                                <td class="score">76.08</td>
+                            </tr>
+                            <tr class="rank-2">
+                                <td class="score">2</td>
+                                <td class="institute-name">Anna University</td>
+                                <td class="score">75.4</td>
+                                <td class="score">79.59</td>
+                                <td class="score">71.94</td>
+                                <td class="score">51.66</td>
+                                <td class="score max-score">100</td>
+                                <td class="score">76.06</td>
+                            </tr>
+                            <tr class="rank-3">
+                                <td class="score">3</td>
+                                <td class="institute-name">Panjab University</td>
+                                <td class="score">66.79</td>
+                                <td class="score">62.15</td>
+                                <td class="score">85.71</td>
+                                <td class="score">74.18</td>
+                                <td class="score">66.75</td>
+                                <td class="score">69.92</td>
+                            </tr>
+                            <tr>
+                                <td class="score">4</td>
+                                <td class="institute-name">Andhra University</td>
+                                <td class="score">78.85</td>
+                                <td class="score">44.73</td>
+                                <td class="score">91.57</td>
+                                <td class="score">82.18</td>
+                                <td class="score">53.05</td>
+                                <td class="score">68.91</td>
+                            </tr>
+                            <tr>
+                                <td class="score">5</td>
+                                <td class="institute-name">Kerala University</td>
+                                <td class="score">74.88</td>
+                                <td class="score">47.75</td>
+                                <td class="score max-score">100</td>
+                                <td class="score">69.12</td>
+                                <td class="score">42.37</td>
+                                <td class="score">67.93</td>
+                            </tr>
+                            <tr>
+                                <td class="score">6</td>
+                                <td class="institute-name">Cochin University of Sc&Tech</td>
+                                <td class="score">75.29</td>
+                                <td class="score">59.31</td>
+                                <td class="score">79.62</td>
+                                <td class="score">61.77</td>
+                                <td class="score">37.47</td>
+                                <td class="score">66.24</td>
+                            </tr>
+                            <tr>
+                                <td class="score">7</td>
+                                <td class="institute-name">Osmania University</td>
+                                <td class="score">78.3</td>
+                                <td class="score">42.88</td>
+                                <td class="score">91.92</td>
+                                <td class="score">61.57</td>
+                                <td class="score">47.5</td>
+                                <td class="score">65.64</td>
+                            </tr>
+                            <tr>
+                                <td class="score">8</td>
+                                <td class="institute-name">University of Kashmir</td>
+                                <td class="score">81.55</td>
+                                <td class="score">48.77</td>
+                                <td class="score">84.3</td>
+                                <td class="score">50.9</td>
+                                <td class="score">41.23</td>
+                                <td class="score">65.17</td>
+                            </tr>
+                            <tr>
+                                <td class="score">9</td>
+                                <td class="institute-name">Gauhati University</td>
+                                <td class="score">75.69</td>
+                                <td class="score">39.32</td>
+                                <td class="score">94.6</td>
+                                <td class="score">67.08</td>
+                                <td class="score">41.03</td>
+                                <td class="score">64.24</td>
+                            </tr>
+                            <tr>
+                                <td class="score">10</td>
+                                <td class="institute-name">Bharathiar University</td>
+                                <td class="score">65.39</td>
+                                <td class="score">56.96</td>
+                                <td class="score">81.03</td>
+                                <td class="score">53.65</td>
+                                <td class="score">58.04</td>
+                                <td class="score">64.09</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TLR Detailed Breakup -->
+            <div class="table-section">
+                <h2 class="table-title">Teaching, Learning & Resources (TLR) Detailed Breakup</h2>
+                <div class="legend">
+                    <div class="legend-item">
+                        <span>SS: Student Strength (20)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span>FSR: Faculty-Student Ratio (25)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span>FQE: Faculty with PhD (20)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span>FRU: Faculty Resources (20)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span>OE+MIR: Other Expenses + Maintenance (15)</span>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>University</th>
+                                <th>SS<br>(20)</th>
+                                <th>FSR<br>(25)</th>
+                                <th>FQE<br>(20)</th>
+                                <th>FRU<br>(20)</th>
+                                <th>OE+MIR<br>(15)</th>
+                                <th>TLR Total<br>(100)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="rank-1 ju-row">
+                                <td class="score">1</td>
+                                <td class="institute-name">Jadavpur University</td>
+                                <td class="score">17.46</td>
+                                <td class="score max-score">25</td>
+                                <td class="score">18.6</td>
+                                <td class="score">7.61</td>
+                                <td class="score">8.5</td>
+                                <td class="score">77.17</td>
+                            </tr>
+                            <tr class="rank-2">
+                                <td class="score">2</td>
+                                <td class="institute-name">Anna University</td>
+                                <td class="score">15.48</td>
+                                <td class="score max-score">25</td>
+                                <td class="score">16.01</td>
+                                <td class="score">7.41</td>
+                                <td class="score">11.5</td>
+                                <td class="score">75.4</td>
+                            </tr>
+                            <tr class="rank-3">
+                                <td class="score">3</td>
+                                <td class="institute-name">Panjab University</td>
+                                <td class="score">16.47</td>
+                                <td class="score">20.43</td>
+                                <td class="score">12.75</td>
+                                <td class="score">8.64</td>
+                                <td class="score">8.5</td>
+                                <td class="score">66.79</td>
+                            </tr>
+                            <tr>
+                                <td class="score">4</td>
+                                <td class="institute-name">Andhra University</td>
+                                <td class="score">14</td>
+                                <td class="score max-score">25</td>
+                                <td class="score">17.42</td>
+                                <td class="score">14.93</td>
+                                <td class="score">7.5</td>
+                                <td class="score">78.85</td>
+                            </tr>
+                            <tr>
+                                <td class="score">5</td>
+                                <td class="institute-name">Kerala University</td>
+                                <td class="score">11.5</td>
+                                <td class="score max-score">25</td>
+                                <td class="score">17.08</td>
+                                <td class="score">16.3</td>
+                                <td class="score">5</td>
+                                <td class="score">74.88</td>
+                            </tr>
+                            <tr>
+                                <td class="score">6</td>
+                                <td class="institute-name">Cochin University of Sc&Tech</td>
+                                <td class="score">11.97</td>
+                                <td class="score max-score">25</td>
+                                <td class="score">18.92</td>
+                                <td class="score">14.4</td>
+                                <td class="score">5</td>
+                                <td class="score">75.29</td>
+                            </tr>
+                            <tr>
+                                <td class="score">7</td>
+                                <td class="institute-name">Osmania University</td>
+                                <td class="score">15.35</td>
+                                <td class="score max-score">25</td>
+                                <td class="score">17.37</td>
+                                <td class="score">13.08</td>
+                                <td class="score">7.5</td>
+                                <td class="score">78.3</td>
+                            </tr>
+                            <tr>
+                                <td class="score">8</td>
+                                <td class="institute-name">University of Kashmir</td>
+                                <td class="score">14.6</td>
+                                <td class="score max-score">25</td>
+                                <td class="score">19.27</td>
+                                <td class="score">9.68</td>
+                                <td class="score">13</td>
+                                <td class="score">81.55</td>
+                            </tr>
+                            <tr>
+                                <td class="score">9</td>
+                                <td class="institute-name">Gauhati University</td>
+                                <td class="score">15.87</td>
+                                <td class="score max-score">25</td>
+                                <td class="score">18.93</td>
+                                <td class="score">10.89</td>
+                                <td class="score">5</td>
+                                <td class="score">75.69</td>
+                            </tr>
+                            <tr>
+                                <td class="score">10</td>
+                                <td class="institute-name">Bharathiar University</td>
+                                <td class="score">11.06</td>
+                                <td class="score max-score">25</td>
+                                <td class="score">17.32</td>
+                                <td class="score">9.01</td>
+                                <td class="score">3</td>
+                                <td class="score">65.39</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- RPC Detailed Breakup -->
+            <div class="table-section">
+                <h2 class="table-title">Research and Professional Practice (RPC) Detailed Breakup</h2>
+                <div class="legend">
+                    <div class="legend-item">
+                        <span>PU: Publications (35)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span>QP: Quality of Publications (35)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span>IPR: Intellectual Property Rights (15)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span>FPPP: Faculty Papers per Publication (15)</span>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>University</th>
+                                <th>PU<br>(35)</th>
+                                <th>QP<br>(35)</th>
+                                <th>IPR<br>(15)</th>
+                                <th>FPPP<br>(15)</th>
+                                <th>RPC Total<br>(100)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="rank-1 ju-row">
+                                <td class="score">1</td>
+                                <td class="institute-name">Jadavpur University</td>
+                                <td class="score">26.87</td>
+                                <td class="score">27.46</td>
+                                <td class="score">11</td>
+                                <td class="score">4.77</td>
+                                <td class="score">70.1</td>
+                            </tr>
+                            <tr class="rank-2">
+                                <td class="score">2</td>
+                                <td class="institute-name">Anna University</td>
+                                <td class="score max-score">30</td>
+                                <td class="score max-score">30</td>
+                                <td class="score max-score">15</td>
+                                <td class="score">4.59</td>
+                                <td class="score">79.59</td>
+                            </tr>
+                            <tr class="rank-3">
+                                <td class="score">3</td>
+                                <td class="institute-name">Panjab University</td>
+                                <td class="score">24.11</td>
+                                <td class="score">27.13</td>
+                                <td class="score">9</td>
+                                <td class="score">1.91</td>
+                                <td class="score">62.15</td>
+                            </tr>
+                            <tr>
+                                <td class="score">4</td>
+                                <td class="institute-name">Andhra University</td>
+                                <td class="score">13.16</td>
+                                <td class="score">12.64</td>
+                                <td class="score">11</td>
+                                <td class="score">7.93</td>
+                                <td class="score">44.73</td>
+                            </tr>
+                            <tr>
+                                <td class="score">5</td>
+                                <td class="institute-name">Kerala University</td>
+                                <td class="score">17.74</td>
+                                <td class="score">15.9</td>
+                                <td class="score">6</td>
+                                <td class="score">8.11</td>
+                                <td class="score">47.75</td>
+                            </tr>
+                            <tr>
+                                <td class="score">6</td>
+                                <td class="institute-name">Cochin University of Sc&Tech</td>
+                                <td class="score">22.84</td>
+                                <td class="score">18.15</td>
+                                <td class="score">8</td>
+                                <td class="score">10.32</td>
+                                <td class="score">59.31</td>
+                            </tr>
+                            <tr>
+                                <td class="score">7</td>
+                                <td class="institute-name">Osmania University</td>
+                                <td class="score">15.38</td>
+                                <td class="score">14.3</td>
+                                <td class="score">11</td>
+                                <td class="score">2.2</td>
+                                <td class="score">42.88</td>
+                            </tr>
+                            <tr>
+                                <td class="score">8</td>
+                                <td class="institute-name">University of Kashmir</td>
+                                <td class="score">19.99</td>
+                                <td class="score">20.9</td>
+                                <td class="score">6</td>
+                                <td class="score">1.88</td>
+                                <td class="score">48.77</td>
+                            </tr>
+                            <tr>
+                                <td class="score">9</td>
+                                <td class="institute-name">Gauhati University</td>
+                                <td class="score">15.72</td>
+                                <td class="score">15.2</td>
+                                <td class="score">5</td>
+                                <td class="score">3.4</td>
+                                <td class="score">39.32</td>
+                            </tr>
+                            <tr>
+                                <td class="score">10</td>
+                                <td class="institute-name">Bharathiar University</td>
+                                <td class="score">24.22</td>
+                                <td class="score">21.7</td>
+                                <td class="score">9</td>
+                                <td class="score">2.04</td>
+                                <td class="score">56.96</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- GO Detailed Breakup -->
+            <div class="table-section">
+                <h2 class="table-title">Graduation Outcomes (GO) Detailed Breakup</h2>
+                <div class="legend">
+                    <div class="legend-item">
+                        <span>GUE: Graduate Outcomes - UG Exam (60)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span>GPHD: Graduate Outcomes - PhD (40)</span>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>University</th>
+                                <th>GUE<br>(60)</th>
+                                <th>GPHD<br>(40)</th>
+                                <th>GO Total<br>(100)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="rank-1 ju-row">
+                                <td class="score">1</td>
+                                <td class="institute-name">Jadavpur University</td>
+                                <td class="score">57.67</td>
+                                <td class="score">35.32</td>
+                                <td class="score">92.99</td>
+                            </tr>
+                            <tr class="rank-2">
+                                <td class="score">2</td>
+                                <td class="institute-name">Anna University</td>
+                                <td class="score">50.62</td>
+                                <td class="score">21.32</td>
+                                <td class="score">71.94</td>
+                            </tr>
+                            <tr class="rank-3">
+                                <td class="score">3</td>
+                                <td class="institute-name">Panjab University</td>
+                                <td class="score">46.74</td>
+                                <td class="score">38.97</td>
+                                <td class="score">85.71</td>
+                            </tr>
+                            <tr>
+                                <td class="score">4</td>
+                                <td class="institute-name">Andhra University</td>
+                                <td class="score max-score">60</td>
+                                <td class="score">31.57</td>
+                                <td class="score">91.57</td>
+                            </tr>
+                            <tr>
+                                <td class="score">5</td>
+                                <td class="institute-name">Kerala University</td>
+                                <td class="score max-score">60</td>
+                                <td class="score max-score">40</td>
+                                <td class="score max-score">100</td>
+                            </tr>
+                            <tr>
+                                <td class="score">6</td>
+                                <td class="institute-name">Cochin University of Sc&Tech</td>
+                                <td class="score max-score">60</td>
+                                <td class="score">19.62</td>
+                                <td class="score">79.62</td>
+                            </tr>
+                            <tr>
+                                <td class="score">7</td>
+                                <td class="institute-name">Osmania University</td>
+                                <td class="score max-score">60</td>
+                                <td class="score">31.92</td>
+                                <td class="score">91.92</td>
+                            </tr>
+                            <tr>
+                                <td class="score">8</td>
+                                <td class="institute-name">University of Kashmir</td>
+                                <td class="score max-score">60</td>
+                                <td class="score">24.3</td>
+                                <td class="score">84.3</td>
+                            </tr>
+                            <tr>
+                                <td class="score">9</td>
+                                <td class="institute-name">Gauhati University</td>
+                                <td class="score max-score">60</td>
+                                <td class="score">34.6</td>
+                                <td class="score">94.6</td>
+                            </tr>
+                            <tr>
+                                <td class="score">10</td>
+                                <td class="institute-name">Bharathiar University</td>
+                                <td class="score max-score">60</td>
+                                <td class="score">21.03</td>
+                                <td class="score">81.03</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- OI Detailed Breakup -->
+            <div class="table-section">
+                <h2 class="table-title">Outreach and Inclusivity (OI) Detailed Breakup</h2>
+                <div class="legend">
+                    <div class="legend-item">
+                        <span>RD: Regional Diversity (30)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span>WD: Women Diversity (30)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span>ESCS: Economically and Socially Challenged Students (20)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span>PCS: Facilities for Physically Challenged Students (20)</span>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>University</th>
+                                <th>RD<br>(30)</th>
+                                <th>WD<br>(30)</th>
+                                <th>ESCS<br>(20)</th>
+                                <th>PCS<br>(20)</th>
+                                <th>OI Total<br>(100)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="rank-1 ju-row">
+                                <td class="score">1</td>
+                                <td class="institute-name">Jadavpur University</td>
+                                <td class="score">4.06</td>
+                                <td class="score">23.73</td>
+                                <td class="score">5.98</td>
+                                <td class="score max-score">20</td>
+                                <td class="score">53.77</td>
+                            </tr>
+                            <tr class="rank-2">
+                                <td class="score">2</td>
+                                <td class="institute-name">Anna University</td>
+                                <td class="score">0.96</td>
+                                <td class="score">25.35</td>
+                                <td class="score">5.35</td>
+                                <td class="score max-score">20</td>
+                                <td class="score">51.66</td>
+                            </tr>
+                            <tr class="rank-3">
+                                <td class="score">3</td>
+                                <td class="institute-name">Panjab University</td>
+                                <td class="score">25.31</td>
+                                <td class="score">27.58</td>
+                                <td class="score">1.29</td>
+                                <td class="score max-score">20</td>
+                                <td class="score">74.18</td>
+                            </tr>
+                            <tr>
+                                <td class="score">4</td>
+                                <td class="institute-name">Andhra University</td>
+                                <td class="score">23.03</td>
+                                <td class="score max-score">30</td>
+                                <td class="score">9.15</td>
+                                <td class="score max-score">20</td>
+                                <td class="score">82.18</td>
+                            </tr>
+                            <tr>
+                                <td class="score">5</td>
+                                <td class="institute-name">Kerala University</td>
+                                <td class="score">12.72</td>
+                                <td class="score max-score">30</td>
+                                <td class="score">6.4</td>
+                                <td class="score max-score">20</td>
+                                <td class="score">69.12</td>
+                            </tr>
+                            <tr>
+                                <td class="score">6</td>
+                                <td class="institute-name">Cochin University of Sc&Tech</td>
+                                <td class="score">7.58</td>
+                                <td class="score max-score">30</td>
+                                <td class="score">4.19</td>
+                                <td class="score max-score">20</td>
+                                <td class="score">61.77</td>
+                            </tr>
+                            <tr>
+                                <td class="score">7</td>
+                                <td class="institute-name">Osmania University</td>
+                                <td class="score">12.09</td>
+                                <td class="score">29.48</td>
+                                <td class="score">0</td>
+                                <td class="score max-score">20</td>
+                                <td class="score">61.57</td>
+                            </tr>
+                            <tr>
+                                <td class="score">8</td>
+                                <td class="institute-name">University of Kashmir</td>
+                                <td class="score">0</td>
+                                <td class="score max-score">30</td>
+                                <td class="score">0.9</td>
+                                <td class="score max-score">20</td>
+                                <td class="score">50.9</td>
+                            </tr>
+                            <tr>
+                                <td class="score">9</td>
+                                <td class="institute-name">Gauhati University</td>
+                                <td class="score">8.18</td>
+                                <td class="score max-score">30</td>
+                                <td class="score">8.9</td>
+                                <td class="score max-score">20</td>
+                                <td class="score">67.08</td>
+                            </tr>
+                            <tr>
+                                <td class="score">10</td>
+                                <td class="institute-name">Bharathiar University</td>
+                                <td class="score">2.48</td>
+                                <td class="score max-score">30</td>
+                                <td class="score">1.17</td>
+                                <td class="score max-score">20</td>
+                                <td class="score">53.65</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>© SC 2025 | IQAC, JU</p>
+            <p>Data Source: Ministry of Education, Government of India</p>
+        </footer>
+    </div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll("table").forEach(table => {
+        const juRow = table.querySelector(".ju-row");
+        if (!juRow) return;
+
+        const juCells = juRow.querySelectorAll("td");
+
+        table.querySelectorAll("tbody tr").forEach(row => {
+            if (row.classList.contains("ju-row")) return;
+
+            const cells = row.querySelectorAll("td");
+
+            // Skip Rank (0) and University Name (1), compare numeric columns only
+            for (let i = 2; i < juCells.length; i++) {
+                const juScore = parseFloat(juCells[i].textContent) || 0;
+                const score = parseFloat(cells[i].textContent) || 0;
+
+                if (score > juScore) {
+                    cells[i].classList.add("higher-rank");
+                }
+            }
+        });
+    });
+});
+</script>
+	
+</body>
+</html>
